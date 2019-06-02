@@ -1,0 +1,66 @@
+%% Encoding: ISO8859-1 %%
+
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%%
+%% modified by Christian Henrich and Matthias Gabel for IKS/ITI
+%%
+%% version 1.3
+%%
+%% mostly compatible to KIT corporate design v1.2
+%% http://www.uni-karlsruhe.de/download/uka/Gestaltungsrichtlinien_komplett.pdf
+
+\documentclass[18pt]{beamer}
+\usetheme{kit}
+
+% if a custom picture is to be used on the title page, copy it into the 'logos'
+% directory, in the line below, replace 'mypicture' with the 
+% filename (without extension) and uncomment the line
+
+ \renewcommand{\titleimage}{frontPic}
+
+% (picture proportions: 63 : 20, *.eps format if you use latex+dvips+ps2pdf,
+% *.jpg/*.png/*.pdf if you use pdflatex)
+
+% if you want to see BibTeX keys in the references view instead of the symbol,
+% uncomment the following line
+% \usebibitemtemplate{\insertbiblabel}
+
+% uncomment the following line if you want to hide the navigation symbols
+%\beamertemplatenavigationsymbolsempty 
+
+% the presentation starts here
+
+\title[Non-polar Token-Pass Brownian Circuits]{Proseminar zellul{\"a}re Automaten:\\ Non-polar Token-Pass Brownian Circuits}
+\subtitle{17-21. 6. 2019}
+\author{Klaus Philipp Theyssen}
+
+\institute[ITI]{Fakult{\"a}t f{\"u}r Informatik, Institut f{\"u}r Theoretische Informatik} % Deutsch
+%\institute[ITI]{Department of Informatics, Institute of Theoretical Informatics} % Englisch
+
+\begin{document}
+
+%\selectlanguage{english} % Deutsch
+\selectlanguage{ngerman} % Englisch
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+%table of contents
+\begin{frame}
+	\frametitle{Outline/Gliederung}
+	\tableofcontents
+\end{frame}
+
+\include{vortrag}
+
+\begin{frame}
+	\frametitle{References}
+	\bibliography{example}
+%	\bibliographystyle{plain} %does not render "url" fields...
+	\bibliographystyle{IEEEtran}  %does render "url" fields, requires "_"s and "#"s to be escaped, e.g. "\_".
+\end{frame}
+
+\end{document}
+
