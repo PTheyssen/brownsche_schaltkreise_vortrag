@@ -13,12 +13,13 @@
 \documentclass[18pt]{beamer}
 \usetheme{kit}
 \usepackage{graphicx}
+\usepackage{wrapfig}
 
 % if a custom picture is to be used on the title page, copy it into the 'logos'
 % directory, in the line below, replace 'mypicture' with the 
 % filename (without extension) and uncomment the line
 
- \renewcommand{\titleimage}{frontPic}
+ \renewcommand{\titleimage}{logo}
 
 % (picture proportions: 63 : 20, *.eps format if you use latex+dvips+ps2pdf,
 % *.jpg/*.png/*.pdf if you use pdflatex)
@@ -33,7 +34,7 @@
 % the presentation starts here
 
 \title[Non-polar Token-Pass Brownian Circuits]{Proseminar zellul{\"a}re Automaten:\\ Non-polar Token-Pass Brownian Circuits}
-\subtitle{17-21. 6. 2019}
+\subtitle{17.6.2019}
 \author{Klaus Philipp Theyssen}
 
 \institute[ITI]{Fakult{\"a}t f{\"u}r Informatik, Institut f{\"u}r Theoretische Informatik} % Deutsch
@@ -56,12 +57,6 @@
 
 \include{vortrag}
 
-\begin{frame}
-	\frametitle{References}
-	\bibliography{example}
-%	\bibliographystyle{plain} %does not render "url" fields...
-	\bibliographystyle{IEEEtran}  %does render "url" fields, requires "_"s and "#"s to be escaped, e.g. "\_".
-\end{frame}
 
 \end{document}
 

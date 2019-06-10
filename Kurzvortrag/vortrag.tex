@@ -1,7 +1,6 @@
 %% Encoding: ISO8859-1 %%
 
 \section{Allgemeines}
-\subsection{Subsection 1.1}
 \frame{
 \frametitle{Allgemeines}
 \begin{itemize}
@@ -10,16 +9,34 @@
     \item Fluktuation der Token als treibende Kraft für Berechnungen
 \end{itemize}
 }
-\subsection{Token-pass Schaltkreise}
+\section{Polare Token-pass Schaltkreise}
 \frame{
-\frametitle{Token-pass Schaltkreise}
-\begin{itemize}
-    \item T-Element als Grundbauteil 
-\end{itemize}
-
-\begin{figure}
-    \begin{flushright}
-        \includegraphics[height=5cm]{bilder/2-T-Elemente.png} 
-    \end{flushright}
-\end{figure}
+\frametitle{Polare T-Elemente}
+\begin{columns}[T]
+\begin{column}[T]{5cm}
+    \begin{itemize}
+        \item Pfeile geben Richtung vor
+        \item Tokens werden nur in dieser vearbeitet
+    \end{itemize}
+\end{column}
+    \begin{column}[T]{5cm}
+        \includegraphics[height=5cm]{bilder/polarElemente.png} 
+    \end{column}
+\end{columns}
 }
+\section{Nicht-polare Token-pass Schaltkreise}
+\frame{
+\frametitle{Nicht-polare T-Elemente}
+\begin{columns}[T]
+\begin{column}[T]{5cm}
+    \begin{itemize}
+        \item Tokens können beide Richtungen nehmen
+        \item Kreise bzw. Blanksymbole geben Einschränkung
+    \end{itemize}
+\end{column}
+    \begin{column}[T]{5cm}
+        \includegraphics[height=5cm]{bilder/nonPolarElemente.png} 
+    \end{column}
+\end{columns}
+}
+
