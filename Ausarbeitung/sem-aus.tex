@@ -192,6 +192,12 @@ es gibt erweiterungen die sie Turing complete machen) daher eher
 der Begriff Universell so verstehen, dass alle möglichen Schaltkreise
 dieser Schaltkreisklasse mithilfe des T-Elements gebaut werden können.
 %
+\begin{figure}[h]
+    \includegraphics[width=7cm]{bilder/tokenBased.png}
+    \caption{Token basierte Bauteile}
+\end{figure}    
+
+
 Sie können von einer endlichen Menge an Schaltkreis Primitiven 
 erzeugt werden (Merge, Fork, Tria)
 
@@ -200,6 +206,15 @@ erzeugt werden (Merge, Fork, Tria)
 Äquivalenz von Token-pass und token-based zeigen (ein kabel wird zu zwei)
 die entsprechenden TP-Merge, TP-Fork, TP-Tria.
 %
+\begin{figure}[h]
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=7cm]{bilder/TokenPassScheme.png}
+    \caption{Token Pass Schema}
+  \end{minipage}\hfill   
+\end{figure} 
+
+
 Token-pass: \\
 - keine Kabel \\
 - miteinander Verbinden (kreuzend),\\
@@ -235,12 +250,32 @@ Deadlocks nicht expizit modelliert werden muss.
 \section{T-Element}
 Als Grundbausteine 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=7cm]{bilder/BasedToPass.png}
+    \caption{Äquivalenz Token based Token pass}
+\end{figure}    
+
 \subsection{Universalität}
 
 %-----------------------------------------------------------------------------
 \section{1-Bit Speicher}
 Nun soll anhand eines 1-Bit Speichers die Funktionsweise von brown'schen 
 token-pass Schaltkreisen erläutert werden. 
+
+\begin{figure}
+  \centering
+  \begin{minipage}{0.45\textwidth}
+      \centering
+      \includegraphics[width=7cm]{bilder/PolarMemory.png} 
+      \caption{1-Bit Speicher polar token pass}
+  \end{minipage}\hfill
+  \begin{minipage}{0.45\textwidth}
+      \centering
+      \includegraphics[width=7cm]{bilder/NonPolarMemory.png} 
+      \caption{1-Bit Speicher nicht polar token pass}
+  \end{minipage}
+\end{figure}
 
 \subsection{Polarer token-pass 1-Bit Speicher}
 Es werden 8 T-Elemente benötigt, es gibt ein Write und ein Read Bereich
@@ -256,6 +291,14 @@ Das Deadlock Backtracking zeigen.
 
 %-----------------------------------------------------------------------------
 \section{UND-Bauteil}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=15cm]{bilder/UndGatter.png}
+    \caption{UND-Gatter aus 11 T-Elementen}
+\end{figure}    
+
+
 Als Teil meiner Eigenarbeit im Rahmen dieses Proseminars habe ich ein UND-Gatter
 mithilfe von nicht-polaren T-Elementen entworfen.
 %
@@ -269,10 +312,6 @@ führt. Solange bis sich beide Input Tokens "gefunden" haben.
 Dann werden bei der C0 Ausgabe zwei Tokens benutzt um einfach die möglichen Wege zu 
 verbinden.
 
-
-\begin{center}
-    \includegraphics[width=15cm]{bilder/UndGatter.png}
-\end{center}    
 
 \subsection{Initialisierung}
 Es ist eine Initialisierung auf der Abbildung gegeben (die Position der Tokens), 
@@ -304,7 +343,7 @@ Jedoch sind Dinge wie Geschwindigkeit der Berechnung, Korrektheit beweisen und
 welche arten von konkreten Implementierungen möglich sind noch zu klären.
 
 
-\section{Wann ist Berechnung vorbei?}
+\subsection{Wann ist Berechnung vorbei?}
 
 \subsection{Geschwindigkeit der Berechnung}
 
