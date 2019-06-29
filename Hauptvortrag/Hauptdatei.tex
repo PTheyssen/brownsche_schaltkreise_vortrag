@@ -12,12 +12,15 @@
 
 \documentclass[18pt]{beamer}
 \usetheme{kit}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{caption}
 
 % if a custom picture is to be used on the title page, copy it into the 'logos'
 % directory, in the line below, replace 'mypicture' with the 
 % filename (without extension) and uncomment the line
 
- \renewcommand{\titleimage}{frontPic}
+ \renewcommand{\titleimage}{logo}
 
 % (picture proportions: 63 : 20, *.eps format if you use latex+dvips+ps2pdf,
 % *.jpg/*.png/*.pdf if you use pdflatex)
@@ -27,13 +30,13 @@
 % \usebibitemtemplate{\insertbiblabel}
 
 % uncomment the following line if you want to hide the navigation symbols
-%\beamertemplatenavigationsymbolsempty 
+\beamertemplatenavigationsymbolsempty 
 
 % the presentation starts here
 
-\title[Short title]{Full title:\\ With all details}
-\subtitle{??. ??. 201?}
-\author{Firstname1 Lastname1, Firstname2 Lastname2}
+\title[Non-polar Token-Pass Brownian Circuits]{Proseminar zellul{\"a}re Automaten:\\ Non-polar Token-Pass Brownian Circuits}
+\subtitle{17.6.2019}
+\author{Klaus Philipp Theyssen}
 
 \institute[ITI]{Fakult{\"a}t f{\"u}r Informatik, Institut f{\"u}r Theoretische Informatik} % Deutsch
 %\institute[ITI]{Department of Informatics, Institute of Theoretical Informatics} % Englisch
@@ -48,19 +51,13 @@
 \end{frame}
 
 %table of contents
-\begin{frame}
-	\frametitle{Outline/Gliederung}
-	\tableofcontents
-\end{frame}
+%\begin{frame}
+%	\frametitle{Outline/Gliederung}
+%	\tableofcontents
+%\end{frame}
 
 \include{vortrag}
 
-\begin{frame}
-	\frametitle{References}
-	\bibliography{example}
-%	\bibliographystyle{plain} %does not render "url" fields...
-	\bibliographystyle{IEEEtran}  %does render "url" fields, requires "_"s and "#"s to be escaped, e.g. "\_".
-\end{frame}
 
 \end{document}
 
