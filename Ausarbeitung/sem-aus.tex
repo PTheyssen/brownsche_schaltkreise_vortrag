@@ -32,7 +32,8 @@
 
 \usepackage[tt=false]{libertine}   % !!!!! das muss man nicht nutzen
 \usepackage[libertine]{newtxmath}  % !!!!! das muss man nicht nutzen
-%\usepackage[supstfm=libertinesups,supscaled=1.2,raised=-.13em]{superiors} % params taken from doc
+%\usepackage[supstfm=libertinesups,supscaled=1.2,raised=-.13em]{superiors}
+% params taken from doc
 
 %
 %\usepackage{tgpagella}
@@ -67,7 +68,7 @@
 \newcommand{\teilnehmername}{Klaus Philipp Theyssen} % !!!!!
 \newcommand{\teilnehmermatrnr}{2061578}        % !!!!!
 \newcommand{\seminarart}{Proseminar}           % !!!!!  oder Seminar
-\newcommand{\seminarlp}{3 LP}                  % !!!!!  Prosem: immer 3 LP, Sem: 3 oder 4 LP
+\newcommand{\seminarlp}{3 LP}                  % !!!!!  Prosem: immer 3 LP, 
 \newcommand{\seminarjahr}{2019}                % !!!!!
 %-----------------------------------------------------------------------------
 \newcommand{\meta}[1]{$\langle$\textit{#1}$\rangle$}
@@ -134,7 +135,7 @@ Reversibility and Universality, S.299-311
 {\thispagestyle{empty}\raggedright
 
 \noindent \textbf{\Large Erklärung}\\[1ex]
-gemäß \S 6 (11) der Prüfungsordnung Informatik % !!!!! oder \S 6 (7) (bei MasterPO 2015)
+gemäß \S 6 (11) der Prüfungsordnung Informatik % !!!!! oder \S 6 (7) 
 (Bachelor) 2015 % oder Master !!!!!
 \\[\baselineskip]
 
@@ -189,16 +190,18 @@ um Unterschiede in Funktionalität und Aufbau hervorzuheben.
 Dann wird das T-Element betrachtet und wie sich damit die Universaltät der
 Brown'schen Token pass Schaltkreise ergibt.
 %
-Allgemein sind alle hier vorgestellten Schaltkreise asynchron, dies bedeutet sie
-haben keinen Zeitgeber und es kann nebenläufig zu Änderungen am Signal kommen.
+Allgemein sind alle hier vorgestellten Schaltkreise asynchron,
+dies bedeutet sie haben keinen Zeitgeber und es kann nebenläufig zu 
+Änderungen am Signal kommen.
 %
-Sie sind robust gegen Verzögerungen (delay-insentive), was heißt das Verzögerungen in der Signalweiterleitung
+Sie sind robust gegen Verzögerungen (delay-insentive),
+was heißt das Verzögerungen in der Signalweiterleitung 
 nicht zu unkorrekten Berechnungen führen.
 
 
 \subsection{Token-based Schaltkreise}
-Token basierte Schaltkreise sind wichtig für physikalische Implementierungen bei
-denen Signale diskret sind.
+Token basierte Schaltkreise sind wichtig für physikalische Implementierungen
+bei denen Signale diskret sind.
 %
 Dabei basieren die Schaltungen auf der Bewegung
 von einzelnen Ladungen. 
@@ -236,8 +239,8 @@ synchronen Schaltkreises und ist deshalb hervorzuheben.
 %
 
 \subsection{Brown'sche Schaltkreise}
-Sie haben wie token-basierte Schaltkreise auch Tokens die sich auf Kabeln bewegen
-und in Schaltkreiselementen miteinander interagieren.
+Sie haben wie token-basierte Schaltkreise auch Tokens die sich auf Kabeln 
+bewegen und in Schaltkreiselementen miteinander interagieren.
 %
 Allerdings wird hier die Interaktion durch Fluktuation getrieben und dient
 als treibende Kraft für das Zusammenwirken der Tokens innerhalb der
@@ -248,8 +251,8 @@ von Backtracking aufzulösen, was sich in einfacherem Design wiederspiegelt.
 
 
 \subsection{Token-pass Schaltkreise}
-Der Name kommt von der Bauweise dieser Schaltkreise, sie verbinden einfach nur Kabel 
-miteinander durch die Tokens hindurchlaufen.
+Der Name kommt von der Bauweise dieser Schaltkreise, sie verbinden einfach nur
+Kabel miteinander durch die Tokens hindurchlaufen.
 %
 Token-pass Schaltkreisen lassen die Zahl der Tokens gleich.
 %
@@ -353,13 +356,6 @@ token-pass Schaltkreisen erläutert werden.
       \caption{1-Bit Speicher nicht polar token pass}
 \end{figure}
 
-\subsection{Polarer token-pass 1-Bit Speicher}
-Es werden 8 T-Elemente benötigt, es gibt ein Write und ein Read Bereich
-es kann zu
-%TODO was ist gemeint 
-Überlaufen??!!
-kommen beim schreiben.  
-
 \subsection{Nicht polarer token-pass 1-Bit Speicher}
 Es werden nur 7 T-Elemente benötigt auch, hier Konzept von Lesen und Schreiben
 erklären und Bedeutung/ Nutzen von Terminator Kabeln.
@@ -374,19 +370,21 @@ Das Deadlock Backtracking zeigen.
     \caption{UND-Gatter aus 11 T-Elementen}
 \end{figure}    
 
-
+Eigenschaften Eigenschaften
 Als Teil meiner Eigenarbeit im Rahmen dieses Proseminars habe ich ein UND-Gatter
 mithilfe von nicht-polaren T-Elementen entworfen.
 %
 Es benutzt den Deadlock backtracking Mechanismus und verundet ansonsten jede 
 mögliche Eingabe mit jeder möglichen Ausgaben. 
 %
-Dabei werden zunächst T-Element zum modellieren der möglichen Wege benutzt, also 
-das Token kann einen davon wählen, was wiederum der richtige ist oder zu einem Deadlock
-führt. Solange bis sich beide Input Tokens "gefunden" haben.
+Dabei werden zunächst T-Element zum modellieren der möglichen Wege benutzt,
+also das Token kann einen davon wählen, was wiederum der richtige ist
+oder zu einem Deadlock führt.
 %
-Dann werden bei der C0 Ausgabe zwei Tokens benutzt um einfach die möglichen Wege zu 
-verbinden.
+Solange bis sich beide Input Tokens "gefunden" haben.
+%
+Dann werden bei der C0 Ausgabe zwei Tokens benutzt um einfach die
+möglichen Wege zu verbinden.
 
 
 \subsection{Initialisierung}
@@ -394,13 +392,13 @@ Es ist eine Initialisierung auf der Abbildung gegeben (die Position der Tokens),
 außerdem ist sind die Kreise in den T-Elementen für eine korrekte Berechnung
 elementar.
 %
-Diese Initialisierung ist natürlich nicht eindeutig und auch die Anordnung der Elemente 
-ist veränderbar was die Funktion nicht beeinflusst.
+Diese Initialisierung ist natürlich nicht eindeutig und auch die Anordnung der
+Elemente ist veränderbar was die Funktion nicht beeinflusst.
 
 \subsection{Korrektheit}
-Eine interessante Frage ist nun ob die Korrektheit dieses Schaltkreises beweisbar ist. 
-Wenn wir die angegebene Initialisierung vorraussetzen können, können wir uns die 
-Korrektheit schnell klar machen indem :
+Eine interessante Frage ist nun ob die Korrektheit dieses Schaltkreises
+beweisbar ist. Wenn wir die angegebene Initialisierung vorraussetzen können,
+können wir uns die Korrektheit schnell klar machen indem :
 %TODO mögliche Token interaktionen druchspielen OBdA für einen Fall
 
 
