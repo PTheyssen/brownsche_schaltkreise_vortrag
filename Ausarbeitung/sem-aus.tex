@@ -192,54 +192,84 @@ Brown'schen Token pass Schaltkreise ergibt.
 Allgemein sind alle hier vorgestellten Schaltkreise asynchron, dies bedeutet sie
 haben keinen Zeitgeber und es kann nebenläufig zu Änderungen am Signal kommen.
 %
-Sie sind delay-insentive, was heißt das verzögerungen in der Signalweiterleitung
-nicht zu unkorrekten Berechnungen führt.
+Sie sind robust gegen Verzögerungen (delay-insentive), was heißt das Verzögerungen in der Signalweiterleitung
+nicht zu unkorrekten Berechnungen führen.
 
 
 \subsection{Token-based Schaltkreise}
-Beispiel Petri netze (original Petri netze sind nicht turing complete aber 
-es gibt erweiterungen die sie Turing complete machen) daher eher 
-der Begriff Universell so verstehen, dass alle möglichen Schaltkreise
-dieser Schaltkreisklasse mithilfe des T-Elements gebaut werden können.
+Token basierte Schaltkreise sind wichtig für physikalische Implementierungen bei
+denen Signale diskret sind.
+%
+Dabei basieren die Schaltungen auf der Bewegung
+von einzelnen Ladungen. 
+%
+Ein Beispiel für token basierte Schaltkreise sind Petrinetze. 
+%
+Token basierte Schaltkreise die delay insentive sind können mithilfe 
+einer Menge von Schaltkreisprimitiven konstruiert werden, genauso 
+wie synchrone Schaltkreise aus NOT-Gattern und UND-Gattern.
+%
+Eine solche Menge nennt man dann universel und Abbildung 1 gibt 
+dafür ein Beispiel.
+%
+Dabei führt Merge zwei Tokens zu einem zusammen.
+% 
+Fork macht aus einem Token zwei.
+%
+Tria fügt zwei Tokens zusammen und je nach eingabe Kabel kommt
+die Ausgabe auf ein bestimmtes Kabel.
+%
+Wobei das Zusammenführen beim Tria nur funktioniert wenn zwei Tokens da sind,
+also ein einzelnes Token wartet solange bis an zweites kommt bis die 
+Überführung stattfindet.
+%
+Diese Funktionalität in asynchronen Schaltkreisen entspricht dem Takt in
+synchronen Schaltkreises und ist deshalb hervorzuheben.
 %
 
 \begin{figure}[h]
-    \includegraphics[width=7cm]{bilder/tokenBased.png}
-    \caption{Token basierte Bauteile}
+       \centering
+       \includegraphics[width=9cm]{bilder/tokenBased.png}
+       \caption{Merge, Fork und Tria}
 \end{figure}    
 
 %
-Sie können von einer endlichen Menge an Schaltkreis Primitiven 
-erzeugt werden (Merge, Fork, Tria)
-
 
 \subsection{Brown'sche Schaltkreise}
 Sie haben wie token-basierte Schaltkreise auch Tokens die sich auf Kabeln bewegen
 und in Schaltkreiselementen miteinander interagieren.
 %
-Allerdings wird hier die Interaktion durch Fluktuation getrieben. 
+Allerdings wird hier die Interaktion durch Fluktuation getrieben und dient
+als treibende Kraft für das Zusammenwirken der Tokens innerhalb der
+Schaltkreiselemente. 
 %
-Gleichzeitig ermöglicht die Fluktuation Deadlocks mithilfe 
-von Backtracking aufzulösen.
+Dies ermöglicht Deadlocks mithilfe 
+von Backtracking aufzulösen, was sich in einfacherem Design wiederspiegelt.
 
 
 \subsection{Token-pass Schaltkreise}
 Der Name kommt von der Bauweise dieser Schaltkreise, sie verbinden einfach nur Kabel 
-miteinander durchdie Tokens hindurchlaufen.
+miteinander durch die Tokens hindurchlaufen.
 %
-Was uns gleich zu der Eigenschaft
-bringt das bei Token-pass Schaltkreisen keine Tokens innerhalb des Schaltkreises 
-entstehen oder verschwinden und auch nicht auf andere Kabel wechseln können.
+Token-pass Schaltkreisen lassen die Zahl der Tokens gleich.
+%
+Tokens können nicht entstehen oder verschwinden und auch 
+nicht auf andere Kabel wechseln.
 %
 Äquivalenz von Token-pass und token-based zeigen (ein kabel wird zu zwei)
 die entsprechenden TP-Merge, TP-Fork, TP-Tria.
 %
+Token-pass Schaltkreise haben eine Menge an EingabeKablen die in
+den Schaltkreis führen und eine Menge an Ausgabekabeln.
+%
+Dabei können innerhalb des Schaltkreises
+noch Schleifen sein. 
+%
+
 \begin{figure}[h]
-  \begin{minipage}{0.45\textwidth}
     \centering
-    \includegraphics[width=7cm]{bilder/TokenPassScheme.png}
+    \includegraphics[width=8cm]{bilder/TokenPassScheme.png}
     \caption{Token Pass Schema}
-  \end{minipage}\hfill   
 \end{figure} 
 
 \subsubsection{Polare token-pass Schaltkreise}
@@ -264,7 +294,27 @@ Deadlocks nicht expizit modelliert werden muss.
 %     Schaltkreis arten darauf verweisen
 %-----------------------------------------------------------------------------
 \section{T-Element}
-Als Grundbausteine 
+Grundlegende Funktion des T-Elementes entspricht mit Abbildung 3.
+%
+Eingang c ist der Basis Eingang des T-Elmentes hier muss immer ein Token
+anliegen damit es zur Verarbeitung kommt.
+%
+Wenn jetzt bei c ein Token anliegt und bei einem der beiden anderen
+Eingänge a oder b noch ein Token anliegt werden diese vom T-Element 
+entlang des gestrichelten Halbkreises auf das parallel verlaufende 
+Kabel überführt.
+%
+Wenn bei a und b ein Token anliegt wird zufällig 
+eines der beiden ausgewählt und mit c überführt.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=7cm]{bilder/T_Element.png}
+    \caption{T-Element}
+\end{figure}    
+
+In Abbildung 4 ist zu erkennen wie die token basierten Schaltkreispirmitive 
+(Merge, Fork und Tria) mit 
 
 \begin{figure}[h]
     \centering
@@ -279,18 +329,10 @@ Als Grundbausteine
 Nun soll anhand eines 1-Bit Speichers die Funktionsweise von brown'schen 
 token-pass Schaltkreisen erläutert werden. 
 
-\begin{figure}
-  \centering
-  \begin{minipage}{0.45\textwidth}
+\begin{figure}[h]
       \centering
-      \includegraphics[width=7cm]{bilder/PolarMemory.png} 
-      \caption{1-Bit Speicher polar token pass}
-  \end{minipage}\hfill
-  \begin{minipage}{0.45\textwidth}
-      \centering
-      \includegraphics[width=7cm]{bilder/NonPolarMemory.png} 
+      \includegraphics[width=9cm]{bilder/NonPolarMemory.png} 
       \caption{1-Bit Speicher nicht polar token pass}
-  \end{minipage}
 \end{figure}
 
 \subsection{Polarer token-pass 1-Bit Speicher}
@@ -310,7 +352,7 @@ Das Deadlock Backtracking zeigen.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=15cm]{bilder/UndGatter.png}
+    \includegraphics[width=12cm]{bilder/UndGatter.png}
     \caption{UND-Gatter aus 11 T-Elementen}
 \end{figure}    
 
