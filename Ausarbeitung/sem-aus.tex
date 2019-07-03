@@ -160,24 +160,34 @@ mit Abänderungen entnommen wurde.
 
 %-----------------------------------------------------------------------------
 \section{Einführung}
-Aufgrund von geringerem Energieverbrauch in integrierten Schaltkreisen
-werden in Zukunft Geräte von interesse sein die nur von einzelnen 
+Bei Elektronik im nanometer Bereich sind Rauschen und Fluktuation 
+entscheidende Faktoren die beim Entwurf entsprechender Schaltkreise 
+zu beachten sind.
+%
+Desweitern ist ein geringerer Energieverbrauch anzustreben, daher 
+werden in Zukunft Geräte von Interesse sein die nur von einzelnen 
 Partikeln geschaltet werden.
 %
-Dabei befinden wir uns nahe dem Thermalen Limit wobei die eigentlich
-Energie zur Signalweiterleitung sehr klein ist und somit auch
-Fluktuation ein Problem ist.
+Die in diesem Paper präsentiereten Brown'schen Schaltkreise nutzen Tokens
+als Signale und setzen Fluktuation aktiv bei ihren Berechnungen ein.
+Die Fluktuation orientiert sich dabei an der Brown'schen Molekularbewegung 
+in der Biologie.
 %
-Die in diesem Paper präsentiereten Brown'schen Schaltkreise wollen
-diese Fluktuation aktiv nutzen und sie zur Berechnung verwenden.
+Im Paper Fundamentals: Brownian Circuits[2] wurden Brown'sche Schaltkreise 
+vorgestellt und das T-Element, welches für die Klasse von Schaltkreisen 
+universell ist, eingeführt.
+
 
 
 %-------------------------------------------------------------------------------
 \section{Grundlagen}
 Tokens sind diskrete nicht teilbare Einheiten die Signale modellieren.
 %
-Zunächst sind die einzelnen Schaltkreis Typen von einander zu unterscheiden 
-und welche Unterschiede in Funktionalität existieren.
+Zunächst werden die im Paper behandelten Schaltkreis Typen vorgestellt 
+um Unterschiede in Funktionalität und Aufbau hervorzuheben. 
+%
+Dann wird das T-Element betrachtet und wie sich damit die Universaltät der
+Brown'schen Token pass Schaltkreise ergibt.
 %
 Allgemein sind alle hier vorgestellten Schaltkreise asynchron, dies bedeutet sie
 haben keinen Zeitgeber und es kann nebenläufig zu Änderungen am Signal kommen.
@@ -192,17 +202,35 @@ es gibt erweiterungen die sie Turing complete machen) daher eher
 der Begriff Universell so verstehen, dass alle möglichen Schaltkreise
 dieser Schaltkreisklasse mithilfe des T-Elements gebaut werden können.
 %
+
 \begin{figure}[h]
     \includegraphics[width=7cm]{bilder/tokenBased.png}
     \caption{Token basierte Bauteile}
 \end{figure}    
 
-
+%
 Sie können von einer endlichen Menge an Schaltkreis Primitiven 
 erzeugt werden (Merge, Fork, Tria)
 
 
+\subsection{Brown'sche Schaltkreise}
+Sie haben wie token-basierte Schaltkreise auch Tokens die sich auf Kabeln bewegen
+und in Schaltkreiselementen miteinander interagieren.
+%
+Allerdings wird hier die Interaktion durch Fluktuation getrieben. 
+%
+Gleichzeitig ermöglicht die Fluktuation Deadlocks mithilfe 
+von Backtracking aufzulösen.
+
+
 \subsection{Token-pass Schaltkreise}
+Der Name kommt von der Bauweise dieser Schaltkreise, sie verbinden einfach nur Kabel 
+miteinander durchdie Tokens hindurchlaufen.
+%
+Was uns gleich zu der Eigenschaft
+bringt das bei Token-pass Schaltkreisen keine Tokens innerhalb des Schaltkreises 
+entstehen oder verschwinden und auch nicht auf andere Kabel wechseln können.
+%
 Äquivalenz von Token-pass und token-based zeigen (ein kabel wird zu zwei)
 die entsprechenden TP-Merge, TP-Fork, TP-Tria.
 %
@@ -213,18 +241,6 @@ die entsprechenden TP-Merge, TP-Fork, TP-Tria.
     \caption{Token Pass Schema}
   \end{minipage}\hfill   
 \end{figure} 
-
-
-Token-pass: \\
-- keine Kabel \\
-- miteinander Verbinden (kreuzend),\\
-- keine Tokens Erzeugen
-
-\subsection{Brown'sche Schaltkreise}
-Die bisherigen Token-pass Schaltkreise können keine Deadlocks verhindern. 
-%
-Deshalb brauchen wir Fluktuation um die Deadlocks wieder aufzulösen mithilfe 
-von Backtracking.
 
 \subsubsection{Polare token-pass Schaltkreise}
 In polaren token-pass Schaltkreises existiert eine bevorzugte Richtung
