@@ -1,26 +1,3 @@
-\begin{filecontents*}{\jobname.bib}
-@article{Worsch_2009_AUC_ar,
-  author  = {Thomas Worsch and Hidenosuke Nishio},
-  title   = {Achieving universality of {CA} by changing the neighborhood},
-  journal = {Journal of Cellular Automata},
-  year    = {2009},
-  volume  = {4},
-  number  = {3},
-  pages   = {237--246},
-}
-@inproceedings{Worsch_2012_IUA_ip_acri,
-  author    = {Thomas Worsch},
-  title     = {({I}ntrinsically?) Universal Asynchronous Cellular Automata},
-  editor    = {Georgios Sirakoulis and Stefania Bandini},
-  booktitle = {Proceedings ACRI 2012},
-  year      = {2012},
-  pages     = {689--698},
-  publisher = {Springer},
-  series    = {LNCS},
-  volume    = {7495},
-}
-\end{filecontents*}
-
 \documentclass[11pt,a4paper]{article}
 
 \usepackage[T1]{fontenc}
@@ -119,7 +96,7 @@ von \textbf{\teilnehmername}, Matr.nr.~\teilnehmermatrnr
 
 \noindent \textbf{\Large Thema} \\[\baselineskip]
 %
-% nachfolgende ein Beispiel, für Konferenzbeiträge, Buchausschnitte, ...
+% nachfolgend ein Beispiel, für Konferenzbeiträge, Buchausschnitte, ...
 % bitte analog vorgehen !!!!!
 %
  Ferdinand Peper and Jia Lee (2018)\\[1ex]
@@ -208,11 +185,11 @@ von einzelnen Ladungen.
 %
 Ein Beispiel für token basierte Schaltkreise sind Petrinetze. 
 %
-Token basierte Schaltkreise die delay insentive sind können mithilfe 
+Token basierte Schaltkreise die delay insentive sind können mit 
 einer Menge von Schaltkreisprimitiven konstruiert werden, genauso 
 wie synchrone Schaltkreise aus NOT-Gattern und UND-Gattern.
 %
-Eine solche Menge nennt man dann universel und Abbildung 1 gibt 
+Eine solche Menge nennt man dann universell und Abbildung 1 gibt 
 dafür ein Beispiel.
 %
 Dabei führt Merge zwei Tokens zu einem zusammen.
@@ -223,8 +200,7 @@ Tria fügt zwei Tokens zusammen und je nach eingabe Kabel kommt
 die Ausgabe auf ein bestimmtes Kabel.
 %
 Wobei das Zusammenführen beim Tria nur funktioniert wenn zwei Tokens da sind,
-also ein einzelnes Token wartet solange bis an zweites kommt bis die 
-Überführung stattfindet.
+also ein einzelnes Token wartet solange bis ein zweites kommt.
 %
 Diese Funktionalität in asynchronen Schaltkreisen entspricht dem Takt in
 synchronen Schaltkreises und ist deshalb hervorzuheben.
@@ -262,11 +238,10 @@ nicht auf andere Kabel wechseln.
 Äquivalenz von Token-pass und token-based zeigen (ein kabel wird zu zwei)
 die entsprechenden TP-Merge, TP-Fork, TP-Tria.
 %
-Token-pass Schaltkreise haben eine Menge an EingabeKablen die in
+Token-pass Schaltkreise haben eine Menge an Eingabekablen die in
 den Schaltkreis führen und eine Menge an Ausgabekabeln.
 %
-Dabei können innerhalb des Schaltkreises
-noch Schleifen sein. 
+Dabei innerhalb des Schaltkreises können Schleifen sein. 
 %
 
 \begin{figure}[h]
@@ -289,12 +264,17 @@ Einschränkung (kreise und blank symbole) wie sie Tokens verarbeiten.
 Außerdem gibt es hier die möglichkeit von Terminatoren, dies sind Kabel
 mit einem Ende auf dem Tokens sich einfach nur vor und zurück bewegen.
 %
+In einem nicht polaren token-pass Schaltkreis kann es aber auch vereinzelt
+polare Kabel geben, wenn dies für die Berechnung Sinn macht.
+%
+Ein Beispiel sind die Ein- und AusgabeKabel da hier Tokens immer nur in eine 
+Richtung gehen sollten und nicht nach erfolgreicher Berechnung diese 
+wieder rückwärtslaufen.
+%
 Die nicht-polaren Schaltkreise ermöglichen einfacheres Design und Verwendung
 von weniger T-Elementen, weil bestimmtes Verhalten zum Verhindern von
 Deadlocks nicht expizit modelliert werden muss.
 
-%TODO T-Elemente bei Grundlagen mit einbauen und bei den jeweiligen 
-%     Schaltkreis arten darauf verweisen
 %-----------------------------------------------------------------------------
 \section{T-Element}
 Grundlegende Funktion des T-Elementes entspricht mit Abbildung 3.
@@ -319,7 +299,7 @@ eines der beiden ausgewählt und mit c überführt.
 In Abbildung 4 ist zu erkennen wie die token basierten Schaltkreispirmitive 
 (Merge, Fork und Tria) mit mithilfe des T-Elementes nachgebaut werden.
 %
-Das T-Element universell für die klasse der token pass 
+Theorem: Das brown'sche T-Element ist universell für die Klasse der token pass 
 Schaltkreise.
 
 \begin{figure}[h]
@@ -343,12 +323,29 @@ Schaltkreise.
     \end{minipage}\hfill
 \end{figure}    
 
-\subsection{Universalität}
+%
+Allerdings ist das Nachbauen von token basierten Schaltkreisen mithilfe
+der TP-Merge, TP-Fork und TP-Tria nicht effizient.
+%
+Da hier die Besonderheit des Fluktuierens der Tokens nicht ausgenutzt wird.
+%
+Beispielsweise benötigt ein 1-Bit Speicher der naiv mithilfe der 
+Schaltkreisprimitiven nachgebaut ist insgesamt 26 T-Elemente.
+%
+Im nächsten Abschnitt werden wir sehen das dies 
+sehr viel effizienter möglich ist wenn man Eigenschaften der brown'schen 
+token pass Schaltkreise beim Design richtig ausnutzt.
 
 %-----------------------------------------------------------------------------
 \section{1-Bit Speicher}
 Nun soll anhand eines 1-Bit Speichers die Funktionsweise von brown'schen 
-token-pass Schaltkreisen erläutert werden. 
+token-pass Schaltkreisen erläutert werden.
+%
+Mithilfe von polaren T-Elementen ist es möglich einen 1-Bit Speicher mit 8
+T-Elementen zu bauen Fundamentals [2]. 
+%
+Bei nicht-polaren brown'schen T-Elementen sind es sogar nur 7.
+%
 
 \begin{figure}[h]
       \centering
@@ -424,23 +421,11 @@ welche arten von konkreten Implementierungen möglich sind noch zu klären.
 \subsubsection{Ein langes Kabel vs. viele T-Elemente}
 
 \subsection{Implementierung}
+cite \cite{Worsch_2012_IUA_ip_acri} test
 
+cite 2 \cite{Worsch_2009_AUC_ar} test
 
-
-
-\label{sec:summary}
-
-Zum Abschluss kommt das Literaturverzeichnis.
-%
-Die beiden Zeilen
-
-\begin{tcblisting}{listing only}
-  \bibliographystyle{plain}
-  \bibliography{\jobname}
-\end{tcblisting}
-
-erzeugen das, was man unter dieser Zeile sieht:
-
+% Literaturverzeichnis 
 \bibliographystyle{plain}
 \bibliography{\jobname}
 
