@@ -135,6 +135,8 @@ mit Abänderungen entnommen wurde.
 \clearpage
 % Ende zweite Seite
 %=======================================================================
+%TODO Bilder mit verweisen und zitate mit verweisen
+%TODO Rechtschreibung
 
 %-----------------------------------------------------------------------------
 \section{Einführung}
@@ -151,7 +153,7 @@ als Signale und setzen Fluktuation aktiv bei ihren Berechnungen ein.
 Die Fluktuation orientiert sich dabei an der Brown'schen Molekularbewegung 
 in der Biologie.
 %
-Im Paper Fundamentals: Brownian Circuits[2] wurden Brown'sche Schaltkreise 
+In \cite{Peper_Fundamentals_2013} wurden Brown'sche Schaltkreise 
 vorgestellt und das T-Element, welches für die Klasse von Schaltkreisen 
 universell ist, eingeführt.
 
@@ -342,9 +344,10 @@ Nun soll anhand eines 1-Bit Speichers die Funktionsweise von brown'schen
 token-pass Schaltkreisen erläutert werden.
 %
 Mithilfe von polaren T-Elementen ist es möglich einen 1-Bit Speicher mit 8
-T-Elementen zu bauen Fundamentals [2]. 
+T-Elementen zu bauen \cite{Peper_Fundamentals_2013}. 
 %
-Bei nicht-polaren brown'schen T-Elementen sind es sogar nur 7.
+Bei nicht-polaren brown'schen T-Elementen sind es sogar
+nur 7 \cite{Peper_nonPolar_2018}.
 %
 
 \begin{figure}[h]
@@ -367,30 +370,29 @@ Das Deadlock Backtracking zeigen.
     \caption{UND-Gatter aus 11 T-Elementen}
 \end{figure}    
 
-Eigenschaften Eigenschaften
 Als Teil meiner Eigenarbeit im Rahmen dieses Proseminars habe ich ein UND-Gatter
 mithilfe von nicht-polaren T-Elementen entworfen.
 %
-Es benutzt den Deadlock backtracking Mechanismus und verundet ansonsten jede 
-mögliche Eingabe mit jeder möglichen Ausgaben. 
+Es benutzt den Deadlock Backtracking Mechanismus und jede 
+mögliche Eingabe wird mit jeder möglichen Ausgabe und-verknüpft. 
 %
 Dabei werden zunächst T-Element zum modellieren der möglichen Wege benutzt,
-also das Token kann einen davon wählen, was wiederum der richtige ist
-oder zu einem Deadlock führt.
+die beiden Eingabe Token versuchen sich also zu entsprechend zu finden.
 %
-Solange bis sich beide Input Tokens "gefunden" haben.
-%
-Dann werden bei der C0 Ausgabe zwei Tokens benutzt um einfach die
-möglichen Wege zu verbinden.
+Haben sich beide Input Tokens gefunden wird ein Token weitergeleitet bei 
+den Eingaben A1 und B1 wird dieses Token direkt zu Ausgabe C1, bei allen 
+anderen Eingabemöglichkeiten werden die Token mithilfe von zwei weiteren 
+T-Elementen zusammengeführt für die Ausgabe C0.
 
 
 \subsection{Initialisierung}
 Es ist eine Initialisierung auf der Abbildung gegeben (die Position der Tokens), 
-außerdem ist sind die Kreise in den T-Elementen für eine korrekte Berechnung
+außerdem sind die Kreise in den T-Elementen für eine korrekte Berechnung
 elementar.
 %
-Diese Initialisierung ist natürlich nicht eindeutig und auch die Anordnung der
-Elemente ist veränderbar was die Funktion nicht beeinflusst.
+Diese Initialisierung ist nicht eindeutig und auch die Anordnung der
+Elemente ist veränderbar, was im Hinblick auf möglichst kurze Kabel 
+für eine schnellere Berechnung von Interesse ist.
 
 \subsection{Korrektheit}
 Eine interessante Frage ist nun ob die Korrektheit dieses Schaltkreises
@@ -402,9 +404,13 @@ können wir uns die Korrektheit schnell klar machen indem :
 
 % ----------------------------------------------------------------------------
 \section{Zusammenfassung und Ausblick}
-In dem Paper (Non-polar token-pass Brownian Circuits) [1] wird eine neue Art
+In dem Paper \cite{Peper_nonPolar_2018} wird eine neue Art
 von Schaltkreis vorgestellt der zukünfitig in der Nanoelektronik eingesetzt
 werden könnte.
+%
+Aufbauend auf den polaren Brown'schen token pass Schaltkreisen aus 
+\cite{Peper_Fundamentals_2013} werden nicht polare Kabel und T-Elemente 
+eingeführt deren Token keinen Bias in ein Richtung haben. 
 %
 Dabei ist das Konzept von Brown'scher Bewegung der Signale (Tokens) 
 der interessante und neue Aspekt der es ermöglicht neue Arten von Schaltkreisen 
@@ -414,18 +420,55 @@ Jedoch sind Dinge wie Geschwindigkeit der Berechnung, Korrektheit beweisen und
 welche arten von konkreten Implementierungen möglich sind noch zu klären.
 
 
-\subsection{Wann ist Berechnung vorbei?}
-
 \subsection{Geschwindigkeit der Berechnung}
+Die Fluktoation der Tokens auf einem Kabel der Länge L führt zu 
+erwartet Zeit 0(L²).
+%
+Desweiteren kann man Sperren einsetzen, sodass Tokens
+auf bestimmten Kabeln sich nur in eine Richtung bewegen können. 
+%
+Dies ist auf den Ausgabekabeln sinnvoll.
+
 
 \subsubsection{Ein langes Kabel vs. viele T-Elemente}
+Eine interessante Frage wäre außerdem wie sich die Geschwindigkeit eines 
+Token um eine gewisse Strecke zu überfinden verhält. 
+%
+Wenn einerseits nur ein langes Kabel durchlaufen wird. 
+%
+Oder meherere T-Elemente zwischengebaut sind bei denen das Token jeweils
+am Basis Eingang ankommt um das Signal weiterzuleiten.
+% 
+Damit verbunden ist die Frage wann genau zwei Token vom T-Element 
+verarbeitet werden, müssen diese in einem gewissen Bereich vorliegen (diskret).
+
+\subsection{Design und Korrektheit}
+Zwar sind mit nicht polaren brown'schen Schaltkreisen Schaltkreiselemente mit
+weniger Bauteilen möglichen.
+%
+Allerdings ist das Vorgehen beim Entwerfen und Überprüfen dieser Art von 
+Schaltkreisen auf Korrektheit noch unklar. 
+
 
 \subsection{Implementierung}
+Das T-Element ist geeignet um theoretisch dieses Berechnungsmodell zu 
+untersuchen ist jedoch für eine Implementierung nicht optmial.
+%
+Es hat zu viele Kabel und ist zu komplex um sinnvoll als Schaltkreisprimitv
+eingesetzt zu werden. 
+%
+Allerdings ist es für simplere Schaltkreiselemente nicht möglich in auch ohne 
+Fluktuation zu funktionieren.
+%
+Auch kann es zu Interaktionen zwischen Tokens kommen die von bei diesem Modell
+nicht beachtet werden. (z.B. Elektronen als Tokens und entsprechende 
+Elektromagnetische Felder)
+%
+Auch kann es zu Interaktionen zwischen Tokens kommen die von bei diesem Modell
+nicht beachtet werden. (z.B. Elektronen als Tokens und entsprechende 
+Elektromagnetische Felder). Desweiteren sind Dinge wie Token bleiben nur
+auf einem Kabel nicht unbedingt leicht um zu setzen für die Implementierung.
 
-%TODO remove 
-cite test \cite{Peper_Fundamentals_2013}
-
-cite test \cite{Peper_nonPolar_2018} 
 
 
 % Literaturverzeichnis erstellen 
