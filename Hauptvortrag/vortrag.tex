@@ -30,13 +30,17 @@
 
 \frame{
     \frametitle{Token pass Schaltkreise}
-    \begin{itemize}
-        \item Einschr\"ankungen von token basiert
-        \item Anzahl der Tokens immer gleich
-        \item Tokens verlassen Kabel nicht
-    \end{itemize}
-   
-    \includegraphics[width=5cm]{bilder/TokenPassScheme.png}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+        \begin{itemize}
+            \item Anzahl der Tokens immer gleich
+            \item Tokens verlassen Kabel nicht
+        \end{itemize}
+        \end{column}
+        \begin{column}{.5\textwidth} 
+            \includegraphics[width=6cm]{bilder/TokenPassScheme.png}
+        \end{column}
+    \end{columns}
 }    
 
 %---------------------------------------------------------------------
@@ -45,22 +49,21 @@
     \frametitle{Brown'sche Schaltkreise}
         \begin{itemize}
             \item Tokens k\"onnen sich frei bewegen 
-            \item Vergleich Brown'sche Molekularbewegung 
             \item Verz\"ogerungen beeinflussen nicht Korrektheit der 
                 Berechnung
+            \item Berechnungsschritte reversibel (Deadlocks)
         \end{itemize}
-
-
 }
 
 %---------------------------------------------------------------------
 
+%FIXME ueberarbeiten 
 \frame{
     \frametitle{T-Element}
     \begin{minipage}{0.45\textwidth}
         \begin{itemize}
-            \item Grundbaustein
-            \item 
+            \item \"aquivalent zu Merge 
+            \item  
         \end{itemize}
     \end{minipage}\hfill
 
@@ -98,34 +101,166 @@
 }
 
 %--------------------------------------------------------------------
+
 \frame{
-    \frametitle{\"Aquivalenz von token basiert und token pass}
-    T-Element ist Schaltkreisprimitiv f\"ur brown'sche token pass 
-    Schaltkreise 
+\frametitle{\"Aquivalenz von token basiert und token pass}
+T-Element ist Schaltkreisprimitiv f\"ur brown'sche token pass 
+Schaltkreise 
 }
+
+%--------------------------------------------------------------------
+
+\frame{
+    \frametitle{Nicht polare token pass Schaltkreise}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{itemize}
+                \item Tokens haben keinen Bias mehr 
+                \item Terminator Kabel 
+                \item Bias auf Ein- und Ausgabekabeln sinnvoll
+            \end{itemize}
+        \end{column}
+
+        \begin{column}{.5\textwidth} 
+            \includegraphics[width=5cm]{bilder/NonPolarTerminator.png}
+        \end{column}
+    \end{columns}
+
+}
+
+%--------------------------------------------------------------------
+
+\frame{
+    \frametitle{Nicht polar token pass Schaltkreise}
+T-Element ist Schaltkreisprimitiv f\"ur brown'sche token pass 
+Schaltkreise 
+}
+
 
 %--------------------------------------------------------------------
 %---------------------------------------------------------------------
 
+%FIXME bilder anpass um ablauf darzustellen
+
 \section{1-Bit Speicher}
-%TODO Funktionsweise auf jeden Fall von nicht polarem, aber 
-% soll ich auch das polare erklären ???
-%für bilder die abläufe aus dem Paper benutzen
+
+\frame{
+    \frametitle{Nicht polarer 1-Bit Speicher}
+    \centering
+    \includegraphics[width=6.5cm]{bilder/NonPolarMemory.png}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{Lesevorgang}
+    \centering
+    \includegraphics[width=6.5cm]{bilder/NonPolarMemory.png}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{Lesen einer 0}
+    \centering
+    \includegraphics[width=6.5cm]{bilder/NonPolarMemory.png}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{Schreibvorgang}
+    \centering
+    \includegraphics[width=6.5cm]{bilder/NonPolarMemory.png}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{Schreiben einer 1}
+    \centering
+    \includegraphics[width=6.5cm]{bilder/NonPolarMemory.png}
+}
 
 
 %---------------------------------------------------------------------
 %---------------------------------------------------------------------
 
+%FIXME bilder anpass um ablauf darzustellen
 \section{UND-Gatter} 
 
+\frame{
+    \frametitle{UND-Gatter}
+    \begin{itemize}
+        \item Repr\"asentation von 1 als Token und 0 als Abwesenheit
+        \item Repr\"asentation von 1 und 0 als Token 
+        \item Ausnutzen des Backtrackings aus Deadlocks
+    \end{itemize}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{0 durch kein Token repr\"asentiert}
+    \centering
+    \includegraphics[width=9cm]{bilder/UND_simple.png}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{0 und 1 druch Token repr\"asentiert}
+    \centering
+    \includegraphics[width=10cm]{bilder/UndGatterOhneRand.png}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{0 und 1 druch Token repr\"asentiert}
+    \centering
+    \includegraphics[width=10cm]{bilder/UndGatterOhneRandBeschriftung.png}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{0 und 1 druch Token repr\"asentiert}
+    \centering
+    \includegraphics[width=10cm]{bilder/UndGatterOhneRandBeschriftung.png}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{0 und 1 druch Token repr\"asentiert}
+    \centering
+    \includegraphics[width=10cm]{bilder/UndGatterOhneRandBeschriftung.png}
+}
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+
+\section{Ausblick}
+
+\frame{
+    \frametitle{Geschwindigkeit der Berechnung}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{Konkrete Implementierung}
+}
 
 
 %---------------------------------------------------------------------
 %---------------------------------------------------------------------
 
 
-\section{Ausblick} 
+\section{Zusammenfassung} 
 
-
-
+\frame{
+    \frametitle{Zusammenfassung}
+}
 
