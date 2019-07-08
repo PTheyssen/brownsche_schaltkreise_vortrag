@@ -3,6 +3,17 @@
 \section{Grundlagen}
 
 \frame{
+\frametitle{Motivation}
+    \begin{itemize}
+        \item Energieeffiziente Schaltkreise f\"ur Nanoelektronik 
+        \item Formales Modell basierend auf Petri Netzen
+        \item Entwerfen von Schaltkreisen m\"oglichst einfach
+    \end{itemize}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
 \frametitle{Grundlagen}
     \begin{itemize}
         \item token basierte Schaltkreise (Bsp. Petri Netze)
@@ -22,7 +33,7 @@
 
     \begin{figure}   
         \includegraphics[width=7cm]{bilder/tokenBased.png}
-        \caption{Merge, Fork und Tria sind Schaltkreisprimitive}
+        \caption{Merge, Fork und Tria}
     \end{figure}
 }
 
@@ -46,6 +57,33 @@
 %---------------------------------------------------------------------
 
 \frame{
+    \frametitle{Von token basiert nach token pass}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+            \includegraphics[width=3cm]{bilder/pass_based2.png}
+            \caption{token basiert}
+            \end{figure}
+        \end{column}
+
+        \begin{column}{.05\textwidth}
+            \Huge
+           $\Leftrightarrow$ 
+        \end{column}
+
+        \begin{column}{.5\textwidth} 
+            \begin{figure}
+            \includegraphics[width=3cm]{bilder/pass_based1.png}
+            \caption{token pass}
+            \end{figure}
+        \end{column}
+    \end{columns}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{Brown'sche Schaltkreise}
         \begin{itemize}
             \item Tokens k\"onnen sich frei bewegen 
             \item Verz\"ogerungen beeinflussen nicht Korrektheit der 
@@ -56,20 +94,22 @@
 
 %---------------------------------------------------------------------
 
-%FIXME ueberarbeiten 
 \frame{
     \frametitle{T-Element}
-    \begin{minipage}{0.45\textwidth}
-        \begin{itemize}
-            \item \"aquivalent zu Merge 
-            \item  
-        \end{itemize}
-    \end{minipage}\hfill
-
-    \begin{minipage}{0.45\textwidth}
-         \includegraphics[width=6cm]{bilder/T_Element.png}
-    \end{minipage}\hfill
-
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+            \includegraphics[width=5cm]{bilder/T-Element.png}
+            \caption{T-Element}
+            \end{figure}
+        \end{column}
+        \begin{column}{.5\textwidth} 
+            \begin{figure}
+            \includegraphics[width=5cm]{bilder/T_ElementPetri.png}
+                \caption{als Petri-Netz}
+            \end{figure}
+        \end{column}
+    \end{columns}
 }
 
 %---------------------------------------------------------------------
@@ -227,12 +267,34 @@ Schaltkreise
 
 \frame{
     \frametitle{Geschwindigkeit der Berechnung}
+    \begin{itemize}
+            %TODO
+        \item Ausnutzen von Bias bei Ein- und Ausgabekabeln
+        \item zus\"atzlich Sperren (Kabel nur in eine Richtung)
+        \item wie effizient ist backtracking aus Deadlocks?
+    \end{itemize}
 }
 
 %---------------------------------------------------------------------
 
 \frame{
     \frametitle{Konkrete Implementierung}
+    \begin{itemize}
+        \item Ans\"atze mit einzelne Elektronen
+            \begin{itemize}
+                \item Problem: Token wirken aufeinander 
+            \end{itemize}
+    \end{itemize}
+}
+
+%---------------------------------------------------------------------
+
+\frame{
+    \frametitle{Korrektheit}
+    \begin{itemize}
+        \item wann ist Berechnung vorbei?
+        \item kann startkonfiguration immer gew\"ahrleistet werden?
+    \end{itemize}
 }
 
 
@@ -244,5 +306,11 @@ Schaltkreise
 
 \frame{
     \frametitle{Zusammenfassung}
+    \begin{itemize}
+        \item Brown'sche Schaltkreise f\"ur Elektronik im Nanometer Bereich
+        \item Nicht polare Brown'sche Schaltkreise erm\"oglichen
+              einfacheres Desgin
+        \item Korrektheit, Geschwindigkeit etc noch ungekl\"art
+    \end{itemize}
 }
 
