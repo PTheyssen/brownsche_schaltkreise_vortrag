@@ -6,8 +6,8 @@
 \frametitle{Motivation}
     \begin{itemize}
         \item Energieeffiziente Schaltkreise f\"ur Nanoelektronik 
-        \item Formales Modell basierend auf Petri Netzen
-        \item Entwerfen von Schaltkreisen m\"oglichst einfach
+        \item Formales Modell 
+        \item Nichtdeterminismus ermöglicht einfacheres Design 
     \end{itemize}
 }
 
@@ -16,16 +16,16 @@
 \frame{
 \frametitle{Grundlagen}
     \begin{itemize}
-        \item token basierte Schaltkreise (Bsp. Petri Netze)
-        \item token pass Schaltkreise
-        \item nicht polare token pass Brown'sche Schaltkreise
+        \item token-basierte Schaltkreise (Bsp. Petri Netze)
+        \item token-pass Schaltkreise
+        \item nichtpolare token-pass brownsche Schaltkreise
     \end{itemize}
 }
 
 %---------------------------------------------------------------------
 
 \frame{
-    \frametitle{Token basierte Schaltkreise}
+    \frametitle{Token-basierte Schaltkreise}
     \begin{itemize}
         \item Signal als Token 
         \item asynchron (kein Takt)
@@ -40,7 +40,7 @@
 %---------------------------------------------------------------------
 
 \frame{
-    \frametitle{Token pass Schaltkreise}
+    \frametitle{Token-pass Schaltkreise}
     \begin{columns}
         \begin{column}{.5\textwidth}
         \begin{itemize}
@@ -57,12 +57,12 @@
 %---------------------------------------------------------------------
 
 \frame{
-    \frametitle{Von token basiert nach token pass}
+    \frametitle{Von token-basiert nach token-pass}
     \begin{columns}
         \begin{column}{.5\textwidth}
             \begin{figure}
             \includegraphics[width=3cm]{bilder/pass_based2.png}
-            \caption{token basiert}
+            \caption{token-basiert}
             \end{figure}
         \end{column}
 
@@ -74,7 +74,7 @@
         \begin{column}{.5\textwidth} 
             \begin{figure}
             \includegraphics[width=3cm]{bilder/pass_based1.png}
-            \caption{token pass}
+            \caption{token-pass}
             \end{figure}
         \end{column}
     \end{columns}
@@ -83,12 +83,12 @@
 %---------------------------------------------------------------------
 
 \frame{
-    \frametitle{Brown'sche Schaltkreise}
+    \frametitle{Brownsche Schaltkreise}
         \begin{itemize}
             \item Tokens k\"onnen sich frei bewegen 
             \item Verz\"ogerungen beeinflussen nicht Korrektheit der 
                 Berechnung
-            \item Berechnungsschritte reversibel (Deadlocks)
+            \item Berechnungsschritte reversibel (Sackgasse)
         \end{itemize}
 }
 
@@ -115,42 +115,24 @@
 %---------------------------------------------------------------------
 
 \frame{
-    \frametitle{\"Aquivalenz von token basiert und token pass}
+    \frametitle{\"Aquivalenz von token-basiert und token-pass}
     \centering
     \includegraphics[width=8cm]{bilder/BasedToPass.png}
 
 }
 
-%---------------------------------------------------------------------
-
-\frame{
-    \frametitle{\"Aquivalenz von token basiert und token pass}
-    \begin{figure}
-        \begin{minipage}{0.45\textwidth}
-            \centering
-            \includegraphics[width=5cm]{bilder/TP_Fork.png}
-            \caption{Fork aus T-Elementen}
-        \end{minipage}\hfill
-        \begin{minipage}{0.45\textwidth}
-            \centering
-            \includegraphics[width=5cm]{bilder/TP_Tria.png}
-            \caption{Tria aus T-Elementen}
-        \end{minipage}\hfill
-    \end{figure}
-}
-
 %--------------------------------------------------------------------
 
 \frame{
-\frametitle{\"Aquivalenz von token basiert und token pass}
-T-Element ist Schaltkreisprimitiv f\"ur brown'sche token pass 
+\frametitle{\"Aquivalenz von token-basiert und token-pass}
+T-Element ist Schaltkreisprimitiv f\"ur brownsche token-pass 
 Schaltkreise 
 }
 
 %--------------------------------------------------------------------
 
 \frame{
-    \frametitle{Nicht polare token pass Schaltkreise}
+    \frametitle{Nichtpolare token-pass Schaltkreise}
     \begin{columns}
         \begin{column}{.5\textwidth}
             \begin{itemize}
@@ -168,22 +150,13 @@ Schaltkreise
 }
 
 %--------------------------------------------------------------------
-
-\frame{
-    \frametitle{Nicht polar token pass Schaltkreise}
-T-Element ist Schaltkreisprimitiv f\"ur brown'sche token pass 
-Schaltkreise 
-}
-
-
-%--------------------------------------------------------------------
 %---------------------------------------------------------------------
 
 
 \section{1-Bit Speicher}
 
 \frame{
-    \frametitle{Nicht polarer 1-Bit Speicher}
+    \frametitle{Nichtpolarer 1-Bit Speicher}
     \centering
     \includegraphics[width=6.5cm]{bilder/NonPolarMemory.png}
 }
@@ -231,7 +204,7 @@ Schaltkreise
     \begin{itemize}
         \item Repr\"asentation von 1 als Token und 0 als Abwesenheit
         \item Repr\"asentation von 1 und 0 als Token 
-        \item Ausnutzen des Backtrackings aus Deadlocks
+        \item Ausnutzen des Backtrackings aus Sackgassen 
     \end{itemize}
 }
 
@@ -271,19 +244,7 @@ Schaltkreise
             %TODO
         \item Ausnutzen von Bias bei Ein- und Ausgabekabeln
         \item zus\"atzlich Sperren (Kabel nur in eine Richtung)
-        \item wie effizient ist backtracking aus Deadlocks?
-    \end{itemize}
-}
-
-%---------------------------------------------------------------------
-
-\frame{
-    \frametitle{Konkrete Implementierung}
-    \begin{itemize}
-        \item Ans\"atze mit einzelne Elektronen
-            \begin{itemize}
-                \item Problem: Token wirken aufeinander 
-            \end{itemize}
+        \item wie effizient ist Backtracking aus Sackgassen (Deadlocks)?
     \end{itemize}
 }
 
@@ -293,7 +254,7 @@ Schaltkreise
     \frametitle{Korrektheit}
     \begin{itemize}
         \item wann ist Berechnung vorbei?
-        \item kann startkonfiguration immer gew\"ahrleistet werden?
+        \item kann Startkonfiguration immer gew\"ahrleistet werden?
     \end{itemize}
 }
 
@@ -303,12 +264,12 @@ Schaltkreise
 
 
 \section{Zusammenfassung} 
-
 \frame{
     \frametitle{Zusammenfassung}
     \begin{itemize}
-        \item Brown'sche Schaltkreise f\"ur Elektronik im Nanometer Bereich
-        \item Nicht polare Brown'sche Schaltkreise erm\"oglichen
+%TODO präziser prägnant was möchte ich sagen !!!
+        \item brownsche Schaltkreise f\"ur Elektronik im Nanometer Bereich
+        \item nichtpolare brown'che Schaltkreise erm\"oglichen
               einfacheres Desgin
         \item Korrektheit, Geschwindigkeit etc noch ungekl\"art
     \end{itemize}
