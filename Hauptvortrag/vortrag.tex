@@ -6,8 +6,8 @@
 \frametitle{Motivation}
     \begin{itemize}
         \item Energieeffiziente Schaltkreise f\"ur Nanoelektronik 
-        \item Formales Modell 
-        \item Nichtdeterminismus ermöglicht einfacheres Design 
+        \item brownsche Molekularbewegung als Vorbild
+        \item Nichtdeterminismus erm\"oglicht einfacheres Design 
     \end{itemize}
 }
 
@@ -115,23 +115,6 @@
 %---------------------------------------------------------------------
 
 \frame{
-    \frametitle{\"Aquivalenz von token-basiert und token-pass}
-    \centering
-    \includegraphics[width=8cm]{bilder/BasedToPass.png}
-
-}
-
-%--------------------------------------------------------------------
-
-\frame{
-\frametitle{\"Aquivalenz von token-basiert und token-pass}
-T-Element ist Schaltkreisprimitiv f\"ur brownsche token-pass 
-Schaltkreise 
-}
-
-%--------------------------------------------------------------------
-
-\frame{
     \frametitle{Nichtpolare token-pass Schaltkreise}
     \begin{columns}
         \begin{column}{.5\textwidth}
@@ -148,6 +131,24 @@ Schaltkreise
     \end{columns}
 
 }
+
+%--------------------------------------------------------------------
+
+\frame{
+    \frametitle{\"Aquivalenz von token-basiert und token-pass}
+    \centering
+    \includegraphics[width=8cm]{bilder/BasedToPass.png}
+
+}
+
+%--------------------------------------------------------------------
+
+\frame{
+    \frametitle{T-Element}
+T-Element ist Schaltkreisprimitiv f\"ur brownsche token-pass 
+Schaltkreise 
+}
+
 
 %--------------------------------------------------------------------
 %---------------------------------------------------------------------
@@ -204,7 +205,6 @@ Schaltkreise
     \begin{itemize}
         \item Repr\"asentation von 1 als Token und 0 als Abwesenheit
         \item Repr\"asentation von 1 und 0 als Token 
-        \item Ausnutzen des Backtrackings aus Sackgassen 
     \end{itemize}
 }
 
@@ -269,9 +269,9 @@ Schaltkreise
     \begin{itemize}
 %TODO präziser prägnant was möchte ich sagen !!!
         \item brownsche Schaltkreise f\"ur Elektronik im Nanometer Bereich
-        \item nichtpolare brown'che Schaltkreise erm\"oglichen
+        \item nichtpolare brownsche Schaltkreise erm\"oglichen
               einfacheres Desgin
-        \item Korrektheit, Geschwindigkeit etc noch ungekl\"art
+        \item konkrete Implementierung fragw\"urdig
     \end{itemize}
 }
 
