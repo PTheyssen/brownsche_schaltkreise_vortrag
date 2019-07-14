@@ -207,7 +207,16 @@ wie synchrone Schaltkreise aus NOT-Gattern und UND-Gattern.
 %
 Eine solche Menge nennt man dann universell und Abbildung \ref{fig:tokenBased}
 gibt dafür ein Beispiel.
-%
+
+
+\begin{figure}[h]
+       \centering
+       \includegraphics[width=9cm]{bilder/tokenBased.png}
+       \caption{Merge, Fork und Tria}
+       \label{fig:tokenBased}
+\end{figure}    
+
+
 Dabei führt Merge zwei Kabel zu einem zusammen, wobei die Tokens einfach 
 nur weitergeleitet werden.
 % 
@@ -228,39 +237,50 @@ gewissermaßen dem Takt in synchronen Schaltkreises
 und ist deshalb hervorzuheben.
 %
 
-\begin{figure}[h]
-       \centering
-       \includegraphics[width=9cm]{bilder/tokenBased.png}
-       \caption{Merge, Fork und Tria}
-       \label{fig:tokenBased}
-\end{figure}    
-
 %-----------------------------------------------------------------------------
 
 \subsection{Token-pass Schaltkreise}
 Der Name kommt von der Bauweise dieser Schaltkreise, sie verbinden einfach nur
-Kabel miteinander durch die Tokens hindurchlaufen.
+Kabel miteinander durch die Tokens hindurchlaufen und die Schaltkreiselemente
+geben diese weiter oder nicht. \\
 %
 Token-pass Schaltkreisen lassen die Zahl der Tokens gleich.
 %
 Tokens können nicht entstehen oder verschwinden und auch 
 nicht auf andere Kabel wechseln.
-%
-Äquivalenz von token-pass und token-based zeigen (ein kabel wird zu zwei)
-die entsprechenden TP-Merge, TP-Fork, TP-Tria.
-%
-Token-pass Schaltkreise haben eine Menge an Eingabekablen die in
-den Schaltkreis führen und eine Menge an Ausgabekabeln.
-%
-Dabei innerhalb des Schaltkreises können Schleifen sein. 
-%
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=8cm]{bilder/TokenPassScheme.png}
-    \caption{Token Pass Schema}
+    \caption{Token-pass Schema}
     \label{fig:tokenPassScheme}
 \end{figure} 
+
+
+Token-pass Schaltkreise haben eine Menge an Eingabekablen die in
+den Schaltkreis führen und eine Menge an Ausgabekabeln.
+%
+Wobei diese in einen Abschnit vor dem Schaltkreis (pre-wire) und einen Abschnit
+danach (post-wire) eingeteilt werden.
+%
+Die Eingabekabel können im pre-wire Abschnitt beliebig Token haben die aber 
+wenn vorhanden auch auf den post-wire Abschnitt geführt werden.
+%
+Die Ausgabekabel haben im pre-wire Abschnitt alle ein Token und haben dann
+beliebig Tokens auf dem post-wire Abschnitt, entsprechend der Ausgabe.
+%
+Innerhalb des Schaltkreises können sich Schleifen befinden. 
+%
+
+%-----------------------------------------------------------------------------
+\subsection{Von token-basiert nach token-pass}
+%TODO text schreiben
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=7cm]{bilder/basedToPass.png}
+    \caption{token-pass (links) und token-basiert (rechts)}
+\end{figure}
+
 
 %-----------------------------------------------------------------------------
 
@@ -284,6 +304,28 @@ der Token, gekennzeichnet durch einen Pfeil.
 Besonders bei den pre-Kabeln und post-Kabeln (also für Ein- und Ausgabe)
 ist dies sinnvoll.
 
+\paragraph{Polares T-Element}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=7cm]{bilder/T_Element.png}
+    \caption{T-Element}
+    \label{fig:T_Element}
+\end{figure}
+
+Grundlegende Funktion des T-Elementes entspricht mit Abbildung 3.
+%
+Eingang c ist der Basis Eingang des T-Elmentes hier muss immer ein Token
+anliegen damit es zur Verarbeitung kommt.
+%
+Wenn jetzt bei c ein Token anliegt und bei einem der beiden anderen
+Eingänge a oder b noch ein Token anliegt werden diese vom T-Element 
+entlang des gestrichelten Halbkreises auf das parallel verlaufende 
+Kabel überführt.
+%
+Wenn bei a und b ein Token anliegt wird zufällig 
+eines der beiden ausgewählt und mit c überführt.
+ 
+
 %-----------------------------------------------------------------------------
 
 \subsubsection{Nichtpolare token-pass brownsche Schaltkreise}
@@ -304,32 +346,19 @@ Die nicht-polaren Schaltkreise ermöglichen einfacheres Design und Verwendung
 von weniger T-Elementen, weil bestimmtes Verhalten zum Verhindern von
 Deadlocks nicht expizit modelliert werden muss.
 
-
-%-----------------------------------------------------------------------------
-%-----------------------------------------------------------------------------
-
-\section{T-Element}
-
+\paragraph{Nichtpolares T-Element}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=7cm]{bilder/T_Element.png}
-    \caption{T-Element}
+    \includegraphics[width=7cm]{bilder/NonPolarTerminator.png}
+    \caption{nichtpolares T-Element und Terminator Kabel}
     \label{fig:T_Element}
 \end{figure}
 
-Grundlegende Funktion des T-Elementes entspricht mit Abbildung 3.
-%
-Eingang c ist der Basis Eingang des T-Elmentes hier muss immer ein Token
-anliegen damit es zur Verarbeitung kommt.
-%
-Wenn jetzt bei c ein Token anliegt und bei einem der beiden anderen
-Eingänge a oder b noch ein Token anliegt werden diese vom T-Element 
-entlang des gestrichelten Halbkreises auf das parallel verlaufende 
-Kabel überführt.
-%
-Wenn bei a und b ein Token anliegt wird zufällig 
-eines der beiden ausgewählt und mit c überführt.
-    
+
+%-----------------------------------------------------------------------------
+%-----------------------------------------------------------------------------
+
+\section{Universalität des T-Element}
 
 In Abbildung 4 ist zu erkennen wie die token basierten Schaltkreispirmitive 
 (Merge, Fork und Tria) mit mithilfe des T-Elementes nachgebaut werden.
@@ -338,26 +367,28 @@ Theorem: Das brown'sche T-Element ist universell für die Klasse der token pass
 Schaltkreise.
 
 \begin{figure}[h]
-    \centering 
     \centering
     \includegraphics[width=7.5cm]{bilder/BasedToPass.png}
-    \caption{Äquivalenz Token based Token pass}
+    \caption{Äquivalenz Token based und Token pass}
     \label{fig:BasedToPass}
 \end{figure}
 
 
-\begin{figure}[h]
-     \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=6cm]{bilder/TP_Fork.png}
-        \caption{Fork aus T-Elementen}
-    \end{minipage}\hfill
-     \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=6cm]{bilder/TP_Tria.png}
-        \caption{Tria aus T-Elementen}
-    \end{minipage}\hfill
-\end{figure}    
+%\begin{figure}[h]
+%    \begin{minipage}{0.45\textwidth}
+%       \centering
+%       \includegraphics[width=6cm]{bilder/TP_Fork.png}
+%       \caption{Fork aus T-Elementen}
+%   \end{minipage}\hfill
+%    \begin{minipage}{0.45\textwidth}
+%       \centering
+%       \includegraphics[width=6cm]{bilder/TP_Tria.png}
+%       \caption{Tria aus T-Elementen}
+%   \end{minipage}\hfill
+%\end{figure}    
+
+Äquivalenz von token-pass und token-based zeigen (ein Kabel wird zu zwei)
+die entsprechenden TP-Merge, TP-Fork, TP-Tria.
 
 %
 Allerdings ist das Nachbauen von token basierten Schaltkreisen mithilfe
@@ -398,23 +429,20 @@ seine Position den derzeitigen Zustand des Speichers angibt.
       \caption{1-Bit Speicher nicht polar token pass}
 \end{figure}
 
+\subsection{Schreibvorgang}
+
+
 \begin{figure}[h]
       \includegraphics[width=14cm]{bilder/write1Mem.png} 
       \caption{Schreiben einer 1}
 \end{figure}
 
+\subsection{Lesevorgang}
 
 \begin{figure}[h]
       \includegraphics[width=14cm]{bilder/read1Mem.png} 
       \caption{Lesen einer 1}
 \end{figure}
-
-%-----------------------------------------------------------------------------
-
-\subsection{Nicht polarer token-pass 1-Bit Speicher}
-Es werden nur 7 T-Elemente benötigt auch, hier Konzept von Lesen und Schreiben
-erklären und Bedeutung/ Nutzen von Terminator Kabeln.
-Das Deadlock Backtracking zeigen.
 
 
 %-----------------------------------------------------------------------------
@@ -459,7 +487,6 @@ für eine schnellere Berechnung von Interesse ist.
 Eine interessante Frage ist nun ob die Korrektheit dieses Schaltkreises
 beweisbar ist. Wenn wir die angegebene Initialisierung vorraussetzen können,
 können wir uns die Korrektheit schnell klar machen indem :
-%TODO mögliche Token interaktionen druchspielen OBdA für einen Fall
 
 
 %-----------------------------------------------------------------------------
@@ -485,7 +512,7 @@ welche arten von konkreten Implementierungen möglich sind noch zu klären.
 
 \subsection{Geschwindigkeit der Berechnung}
 Die Fluktoation der Tokens auf einem Kabel der Länge L führt zu 
-erwartet Zeit 0(L²).
+erwartet Zeit O(L²).
 %
 Desweiteren kann man Sperren einsetzen, sodass Tokens
 auf bestimmten Kabeln sich nur in eine Richtung bewegen können. 
@@ -494,23 +521,10 @@ Dies ist auf den Ausgabekabeln sinnvoll.
 
 %-----------------------------------------------------------------------------
 
-\subsubsection{Ein langes Kabel vs. viele T-Elemente}
-Eine interessante Frage wäre außerdem wie sich die Geschwindigkeit eines 
-Token um eine gewisse Strecke zu überfinden verhält. 
-%
-Wenn einerseits nur ein langes Kabel durchlaufen wird. 
-%
-Oder meherere T-Elemente zwischengebaut sind bei denen das Token jeweils
-am Basis Eingang ankommt um das Signal weiterzuleiten.
-% 
-Damit verbunden ist die Frage wann genau zwei Token vom T-Element 
-verarbeitet werden, müssen diese in einem gewissen Bereich vorliegen (diskret).
-
-%-----------------------------------------------------------------------------
-
-\subsection{Design und Korrektheit}
+\subsection{Korrektheit}
 Zwar sind mit nicht polaren brown'schen Schaltkreisen Schaltkreiselemente mit
 weniger Bauteilen möglichen.
+
 %
 Allerdings ist das Vorgehen beim Entwerfen und Überprüfen dieser Art von 
 Schaltkreisen auf Korrektheit noch unklar. 
