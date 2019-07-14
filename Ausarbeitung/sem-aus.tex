@@ -16,6 +16,7 @@
 %\usepackage{tgpagella}
 %\usepackage[euler-digits]{eulervm}
 %
+\usepackage{textcomp}
 \usepackage{csquotes}
 
 \usepackage{microtype}
@@ -269,11 +270,10 @@ Die Ausgabekabel haben im pre-wire Abschnitt alle ein Token und haben dann
 beliebig Tokens auf dem post-wire Abschnitt, entsprechend der Ausgabe.
 %
 Innerhalb des Schaltkreises können sich Schleifen befinden. 
-%
+
 
 %-----------------------------------------------------------------------------
 \subsection{Von token-basiert nach token-pass}
-%TODO text schreiben
 
 \begin{figure}[h]
     \centering
@@ -317,16 +317,16 @@ der Token, gekennzeichnet durch einen Pfeil.
 
 Grundlegende Funktion des T-Elementes entspricht. 
 %
-Eingang c ist der Basis Eingang des T-Elementes, hier muss immer ein Token
+Eingang $ c $ ist der Basis Eingang des T-Elementes, hier muss immer ein Token
 anliegen damit es zur Verarbeitung kommt.
 %
-Wenn bei c ein Token anliegt und bei einem der beiden anderen
-Eingänge a oder b auch ein Token anliegt werden diese vom T-Element 
+Wenn bei $ c $ ein Token anliegt und bei einem der beiden anderen
+Eingänge $ a $ oder $ b $ auch ein Token anliegt werden diese vom T-Element 
 entlang des gestrichelten Halbkreises auf das parallel verlaufende 
-Kabel überführt.
+Kabel überführt entsprechend auf $ c' $  und $ a'$  bzw. $ b' $.
 %
-Wenn bei a und b gleichtzeitig ein Token anliegt wird zufällig 
-eines der beiden ausgewählt und mit c überführt.
+Wenn bei $ a $ und $ b $ gleichtzeitig ein Token anliegt wird zufällig 
+eines der beiden ausgewählt und mit dem Token bei $ c $ überführt.
  
 
 %-----------------------------------------------------------------------------
@@ -452,15 +452,33 @@ nur 7  T-Elemente \cite{Peper_nonPolar_2018}.
 Grundlegend gibt es jeweils eine Menge an T-Elementen für das Lesen bzw. 
 Schreiben.
 %
-Von zentraler Bedeutung ist ein Token in der Mitte des Schaltkreises, das über 
-seine Position den derzeitigen Zustand des Speichers angibt.
+Von zentraler Bedeutung ist ein Token in der Mitte des Schaltkreises, das über seine Position den derzeitigen Zustand des Speichers angibt.
 %
+Im folgenden wird dieses Token mit Zustandstoken bezeichnet. \\
+%
+Es kann die folgende Zustände einnehmen:
+
+\begin{itemize}
+    \item 0 eine 0 ist gespeichert
+    \item 1 eine 1 ist gespeichert 
+    \item N neutraler Zustand, der eingenommen wird bevor
+        neuer Zustand geschrieben wird
+    \item 0' temporärer Zustand während 0 ausgelesen wird
+    \item 1' temporärer Zustand während 1 ausgelesen wird
+\end{itemize}
+
 Der Speicher soll mit einer 0 initialisiert sein.
 %
 Entsprechend ist auch das mittlere Token (umkreist) in Abbildung 7 positioniert.
 
 
 \subsection{Schreibvorgang}
+
+\begin{figure}[h]
+      \includegraphics[width=14cm]{bilder/write1Mem.png} 
+      \caption{Schreiben einer 1}
+\end{figure}
+
 Zunächst soll der Schreibvorgang erläutert werden.
 %
 Wobei eine 0 gespeichert ist und eine 1 geschrieben wird.
@@ -469,20 +487,54 @@ Der Schaltkreis durchläuft 6 verschieden Zustände, wobei einer
 davon eine Sackgasse ist.
 %
 In Abbildung 8 sind die entsprechenden Übergänge gekennzeichnet 
-und jeweils das T-Element was als letztes Tokens bewegt hat grau markiert.
-
-\begin{figure}[h]
-      \includegraphics[width=14cm]{bilder/write1Mem.png} 
-      \caption{Schreiben einer 1}
-\end{figure}
+und jeweils das T-Element, was als letztes Tokens bewegt hat, ist grau markiert.
+%
+Als Eingabe haben wir ein Token auf $ W_{1} $, dieses wird entsprechend 
+dem Übergang $ T_{1} $ in Abbildung 8 verarbeitet.
+%
+Jetzt kann das Token unterhalb des graumarkierten T-Elementes entweder
+nach rechts $ T_{3} $ oder links $ T_{2} $ wandern. 
+%
+Wobei rechts in eine Sackgasse führt, wenn eine 0 gespeichert ist.
+%
+Nach $ T_{2} $ kann im nächsten Schritt $ T_{3} $ ausgeführt werden
+womit das Zustandstoken in den Zustand N überführt wird.
+%
+Anschließend kann es über $ T_{5} $ mit dem ursprünglichen Eingabetoken
+interagieren und so den neuen Zustand 1 annehmen. \\
+%
+Zu jedem Übergang $ T_{i} i \in \{1, 2, 3, 4, 5\} $ gibt es einen 
+entsprechenden Übergang $ T'_{i} $ der ihn wieder rückgängig macht.
 
 \subsection{Lesevorgang}
-Jetzt wird das Auslesen der geschriebenen 1 erläutert.
 
 \begin{figure}[h]
       \includegraphics[width=14cm]{bilder/read1Mem.png} 
       \caption{Lesen einer 1}
 \end{figure}
+
+Jetzt wird das Auslesen einer gespeicherten 1 erläutert.
+%
+Als Eingabe haben wir ein Token auf R.
+%
+Dieses kann nun dem mit dem Token links $ T_{6} $ oder rechts $ T_{7} $
+vom ersten T-Element verarbeitet werden.
+%
+Wenn eine eins gespeichert ist führt links in eine Sackgasse, aus der
+die Berechnung mit $ T'_{6} $ wieder entkommt.
+%
+Nach $ T_{7} $ kann das Zustandstoken über $ T_{8} $ in den Zustand 1'
+überführt werden. 
+%
+Hier kann das Zustandstoken dann via $ T_{9} $ mit dem 
+Ausgabetoken interagieren.
+%
+Wie beim Schreiben kann jeder Berechnungschritt durch einen 
+entsprechenden Übergang wieder rückgangig gemacht werden.
+%
+Da jedoch das Ausgabekabel polar ist (gekennzeichnet durch Pfeil)
+ist die Wahrscheinlichkeit das nach Interaktion mit dem Ausgabetoken die 
+Berechnung rückgängig gemacht wird sehr gering.
 
 
 %-----------------------------------------------------------------------------
@@ -534,7 +586,50 @@ falschen Ausgaben kommen wie: 0 und 1 gleichzeitig oder zweimal 0 bzw. 1.
 %-----------------------------------------------------------------------------
 %-----------------------------------------------------------------------------
 
-\section{Zusammenfassung und Ausblick}
+\section{Ausblick}
+\subsection{Geschwindigkeit der Berechnung}
+Die Fluktuation der Tokens auf einem Kabel der Länge L führt zu 
+erwarteten Zeit von $ O(L^2) $ in der ein Token diese Strecke zurücklegt.
+%
+Folglich ist die Länge der Kabel möglichst minimal zu halten. 
+%
+Damit ist die Frage nach der optimalen Anordnung der Bauteile und der damit 
+verbundenen Initialisierung auch von Bedeutung.
+%
+Desweiteren kann man Sperren einsetzen, sodass Tokens
+auf bestimmten Kabeln sich nur in eine Richtung bewegen können. 
+%
+Konkret kann dies in Form von Dioden realisiert werden, diese verbrauchen
+allerdings Strom \cite{Peper_Fundamentals_2013}.
+%
+
+%-----------------------------------------------------------------------------
+
+\subsection{Implementierung}
+Das T-Element ist für theoretische Überlegungen geeignet jedoch für eine
+Implementierung nicht optmial.
+%
+Es hat zu viele Kabel und ist zu komplex um sinnvoll als Schaltkreisprimitv
+eingesetzt zu werden. 
+%
+Es gibt noch simplere Schaltkreiselemente \cite{Peper_Fundamentals_2013}
+alledings funktionieren diese nur mit Fluktuation. 
+%
+Was in Hinblick auf eine Implementierung im Prinzip nicht umzusetzen ist 
+\cite{Peper_Fundamentals_2013}.
+%
+Auch kann es zu Interaktionen zwischen Tokens kommen die bei diesem Modell
+nicht beachtet werden. (z.B. Elektronen als Tokens und entsprechende 
+Elektromagnetische Felder)
+%
+Daher sind Forderungen wie z.B., dass Token nur auf einem Kabel 
+bleiben dürfen bei einer konkreten Implementierung nicht leicht umzusetzen.
+
+
+%-----------------------------------------------------------------------------
+%-----------------------------------------------------------------------------
+
+\section{Zusammenfassung}
 In dem Aufsatz \cite{Peper_nonPolar_2018} wird eine neue Art
 von Schaltkreis vorgestellt der zukünftig in der Nanoelektronik eingesetzt
 werden könnte.
@@ -547,50 +642,12 @@ Dabei ist das Konzept von brownscher Bewegung der Tokens und der damit
 verbundene Nichtdeterminismus interessant und resultiert in einer neuen Art von
 Schaltkreisen, deren Design und Eigenschaften weiter zu untersuchen sind.
 %
-Jedoch sind Dinge wie die Geschwindigkeit der Berechnung, Korrektheit und 
-welche Arten von konkreten Implementierungen möglich sind noch weitgehend offen.
-
-%-----------------------------------------------------------------------------
-
-\subsection{Geschwindigkeit der Berechnung}
-Die Fluktoation der Tokens auf einem Kabel der Länge L führt zu 
-erwartet Zeit O(L²).
+Beim Schaltkreisentwurf sind die Geschwindigkeit der Berechnung, 
+Energieverbrauch und die Suchfähigkeit der Token alles wichtige Metriken,
+die man gegeneinander abwegen muss um eine gutes Resultat zu erhalten.
 %
-Desweiteren kann man Sperren einsetzen, sodass Tokens
-auf bestimmten Kabeln sich nur in eine Richtung bewegen können. 
-%
-Dies ist auf den Ausgabekabeln sinnvoll.
-
-%-----------------------------------------------------------------------------
-
-\subsection{Korrektheit}
-Zwar sind mit nichtpolaren brownschen Schaltkreisen Schaltkreiselemente mit
-weniger Bauteilen möglichen.
-
-%
-Allerdings ist das Vorgehen beim Entwerfen und Überprüfen dieser Art von 
-Schaltkreisen auf Korrektheit noch unklar. 
-
-%-----------------------------------------------------------------------------
-
-\subsection{Implementierung}
-Das T-Element ist geeignet um theoretisch dieses Berechnungsmodell zu 
-untersuchen ist jedoch für eine Implementierung nicht optmial.
-%
-Es hat zu viele Kabel und ist zu komplex um sinnvoll als Schaltkreisprimitv
-eingesetzt zu werden. 
-%
-Allerdings ist es für simplere Schaltkreiselemente nicht möglich in auch ohne 
-Fluktuation zu funktionieren.
-%
-Auch kann es zu Interaktionen zwischen Tokens kommen die von bei diesem Modell
-nicht beachtet werden. (z.B. Elektronen als Tokens und entsprechende 
-Elektromagnetische Felder)
-%
-Auch kann es zu Interaktionen zwischen Tokens kommen die von bei diesem Modell
-nicht beachtet werden. (z.B. Elektronen als Tokens und entsprechende 
-Elektromagnetische Felder). Desweiteren sind Dinge wie Token bleiben nur
-auf einem Kabel nicht unbedingt leicht um zu setzen für die Implementierung.
+Jedoch ist die Frage nach Arten von konkreten Implementierungen 
+noch weitgehend offen.
 
 
 
