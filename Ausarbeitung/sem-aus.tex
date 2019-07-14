@@ -136,7 +136,6 @@ mit Abänderungen entnommen wurde.
 \clearpage
 % Ende zweite Seite
 %=======================================================================
-%TODO Bilder mit verweisen und zitate mit verweisen
 %TODO Rechtschreibung
 %TODO Absätze einfügen
 
@@ -275,34 +274,38 @@ Innerhalb des Schaltkreises können sich Schleifen befinden.
 %-----------------------------------------------------------------------------
 \subsection{Von token-basiert nach token-pass}
 %TODO text schreiben
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=7cm]{bilder/basedToPass.png}
     \caption{token-pass (links) und token-basiert (rechts)}
 \end{figure}
 
+Token-basierte Schaltkreise können äquivalent als token-pass Schaltkreise 
+dargestellt werden, indem einfach aus jedem Kabel zwei werden und die Token 
+sich entsprechend der Abbildung 3 verhalten.
 
 %-----------------------------------------------------------------------------
 
 \subsection{Brownsche Schaltkreise}
-Haben wie token-basierte Schaltkreise auch Tokens die sich auf Kabeln 
-bewegen und in Schaltkreiselementen miteinander interagieren.
+Brownsche Schaltkreise sind eine Erweiterung der token-pass Schaltkreise. 
 %
-Allerdings wird hier die Interaktion durch Fluktuation getrieben und dient
-als treibende Kraft für das Zusammenwirken der Tokens innerhalb der
-Schaltkreiselemente. 
+Tokens können sich nun frei bewegen, angelehnt an die
+brownsche Molekularbewegung.
 %
-Dies ermöglicht Deadlocks mithilfe 
-von Backtracking aufzulösen, was sich in einfacherem Design wiederspiegelt.
+Diese Fluktuation ist treibende Kraft für das Zusammenwirken der Tokens 
+innerhalb der Schaltkreiselemente. 
+%
+Sie ermöglicht Tokens aus Sackgassen wieder zu entkommen,
+was sich in einfacherem Design wiederspiegelt da nicht alles explizit 
+modelliert werden muss.
 
 %-----------------------------------------------------------------------------
 
 \subsubsection{Polare token-pass brownsche Schaltkreise}
-In polaren token-pass Schaltkreises existiert eine bevorzugte Richtung
+In polaren token-pass Schaltkreises existiert eine bevorzugte Richtung (Bias)
 der Token, gekennzeichnet durch einen Pfeil.
 %
-Besonders bei den pre-Kabeln und post-Kabeln (also für Ein- und Ausgabe)
-ist dies sinnvoll.
 
 \paragraph{Polares T-Element}
 \begin{figure}[h]
@@ -312,44 +315,57 @@ ist dies sinnvoll.
     \label{fig:T_Element}
 \end{figure}
 
-Grundlegende Funktion des T-Elementes entspricht mit Abbildung 3.
+Grundlegende Funktion des T-Elementes entspricht. 
 %
-Eingang c ist der Basis Eingang des T-Elmentes hier muss immer ein Token
+Eingang c ist der Basis Eingang des T-Elementes, hier muss immer ein Token
 anliegen damit es zur Verarbeitung kommt.
 %
-Wenn jetzt bei c ein Token anliegt und bei einem der beiden anderen
-Eingänge a oder b noch ein Token anliegt werden diese vom T-Element 
+Wenn bei c ein Token anliegt und bei einem der beiden anderen
+Eingänge a oder b auch ein Token anliegt werden diese vom T-Element 
 entlang des gestrichelten Halbkreises auf das parallel verlaufende 
 Kabel überführt.
 %
-Wenn bei a und b ein Token anliegt wird zufällig 
+Wenn bei a und b gleichtzeitig ein Token anliegt wird zufällig 
 eines der beiden ausgewählt und mit c überführt.
  
 
 %-----------------------------------------------------------------------------
 
 \subsubsection{Nichtpolare token-pass brownsche Schaltkreise}
-Hier können die Tokens frei fluktuieren, allerdings haben die T-Elemente eine
-Einschränkung (kreise und blank symbole) wie sie Tokens verarbeiten.
+Die Tokens haben keinen Bias mehr und können frei fluktuieren.
 %
-Außerdem gibt es hier die möglichkeit von Terminatoren, dies sind Kabel
-mit einem Ende auf dem Tokens sich einfach nur vor und zurück bewegen.
+Die nichtpolaren token-pass brownschen Schaltkreise haben eine neue Notation
+an den Eingängen von T-Elementen (Kreise oder blank Symbole bzw. nichts).
 %
-In einem nicht polaren token-pass Schaltkreis kann es aber auch vereinzelt
-polare Kabel geben, wenn dies für die Berechnung Sinn macht.
+Diese Notation macht Einschränkungen für die Funktion
+der Kabel und des T-Elementes.
 %
-Ein Beispiel sind die Ein- und AusgabeKabel da hier Tokens immer nur in eine 
-Richtung gehen sollten und nicht nach erfolgreicher Berechnung diese 
+Wenn die Enden eines Kabels das gleiche Ende haben dann ist dieses Kabel nicht
+polar. 
+%
+Wenn sie unterschiedlich sind entsprechen sie einem polaren Kabel, wobei 
+der Bias dann in Richtung des Kreises vorliegt.
+%
+In einem T-Element können jetzt nur Eingänge miteinander verarbeitet werden
+die das gleiche Symbol haben. \\
+%
+Ebenfalls neu sind die sogenannten Terminator Kabel, diese Kabel haben ein 
+Kreissegment als Ende und halten einfach die Tokens 
+davon ab das Kabel zu verlassen. \\
+%
+Für einige Kabel in einem nichtpolaren Schaltkreis ist ein Bias sinnvoll.
+%
+Ein Beispiel sind die Ausgabekabel da sich hier Tokens immer nur in eine 
+Richtung bewegen sollten und nicht nach erfolgreicher Berechnung diese 
 wieder rückwärtslaufen.
 %
 Die nicht-polaren Schaltkreise ermöglichen einfacheres Design und Verwendung
 von weniger T-Elementen, weil bestimmtes Verhalten zum Verhindern von
-Deadlocks nicht expizit modelliert werden muss.
+Deadlocks, ausgelöst von Sackgassen, nicht expizit modelliert werden muss.
 
-\paragraph{Nichtpolares T-Element}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=7cm]{bilder/NonPolarTerminator.png}
+    \includegraphics[width=5cm]{bilder/NonPolarTerminator.png}
     \caption{nichtpolares T-Element und Terminator Kabel}
     \label{fig:T_Element}
 \end{figure}
@@ -360,16 +376,29 @@ Deadlocks nicht expizit modelliert werden muss.
 
 \section{Universalität des T-Element}
 
-In Abbildung 4 ist zu erkennen wie die token basierten Schaltkreispirmitive 
+In Abbildung 6 ist zu erkennen wie die token-basierten Schaltkreispirmitive 
 (Merge, Fork und Tria) mit mithilfe des T-Elementes nachgebaut werden.
 %
-Theorem: Das brown'sche T-Element ist universell für die Klasse der token pass 
-Schaltkreise.
+\\
+Daraus folgt, dass das brownsche T-Element universell für die Klasse der 
+token-pass brownschen Schaltkreise ist.
+\\
+%
+Laut den Autoren ist dies sogar die Klasse aller berechenbarer Funktionen und
+somit sind token-pass brownsche Schaltkreise berechnungsuniversell. 
+%
+Die Berechnungsuniversalität der token-basierten Schaltkreise wird in
+\cite{Lee_2005} gezeigt, dies geschieht allerdings durch Verweisen auf 
+noch ältere Aufsätze bis schließlich  auf \cite{Keller_1974} verwiesen wird.
+%
+Dadurch kann ich nicht nachvollziehen ob man wirklich von berechnungsuniversell
+sprechen kann bzw. die Universalität von einer Implentierung erreicht
+werden würde. 
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=7.5cm]{bilder/BasedToPass.png}
-    \caption{Äquivalenz Token based und Token pass}
+    \caption{Äquivalenz token-based und token-pass}
     \label{fig:BasedToPass}
 \end{figure}
 
@@ -387,21 +416,18 @@ Schaltkreise.
 %   \end{minipage}\hfill
 %\end{figure}    
 
-Äquivalenz von token-pass und token-based zeigen (ein Kabel wird zu zwei)
-die entsprechenden TP-Merge, TP-Fork, TP-Tria.
-
 %
-Allerdings ist das Nachbauen von token basierten Schaltkreisen mithilfe
-der TP-Merge, TP-Fork und TP-Tria nicht effizient.
+Das direkte Nachbauen von token-basierten Schaltkreisen mithilfe
+der TP-Merge, TP-Fork und TP-Tria ist nicht effizient.
 %
-Da hier die Besonderheit des Fluktuierens der Tokens nicht ausgenutzt wird.
+Da dabei das Fluktuierens der Tokens nicht ausgenutzt wird.
 %
 Beispielsweise benötigt ein 1-Bit Speicher der naiv mithilfe der 
 Schaltkreisprimitiven nachgebaut ist insgesamt 26 T-Elemente.
 %
-Im nächsten Abschnitt werden wir sehen das dies 
-sehr viel effizienter möglich ist wenn man Eigenschaften der brown'schen 
-token pass Schaltkreise beim Design richtig ausnutzt.
+Im nächsten Abschnitt werden wir sehen, dass dies sehr viel effizienter möglich
+ist, wenn man Eigenschaften der brownschen token-pass Schaltkreise
+beim Design richtig ausnutzt.
 
 
 %-----------------------------------------------------------------------------
@@ -415,13 +441,7 @@ Mithilfe von polaren T-Elementen ist es möglich einen 1-Bit Speicher mit 8
 T-Elementen zu bauen \cite{Peper_Fundamentals_2013}. 
 %
 Bei nicht-polaren brownschen T-Elementen sind es sogar
-nur 7 \cite{Peper_nonPolar_2018}.
-%
-Grundlegend gibt es jeweils eine Menge an T-Elementen für das Lesen bzw. 
-Schreiben.
-%
-Von zentraler Bedeutung ist ein Token in der Mitte des Schaltkreises, das über 
-seine Position den derzeitigen Zustand des Speichers angibt.
+nur 7  T-Elemente \cite{Peper_nonPolar_2018}.
 
 \begin{figure}[h]
       \centering
@@ -429,8 +449,27 @@ seine Position den derzeitigen Zustand des Speichers angibt.
       \caption{1-Bit Speicher nicht polar token pass}
 \end{figure}
 
-\subsection{Schreibvorgang}
+Grundlegend gibt es jeweils eine Menge an T-Elementen für das Lesen bzw. 
+Schreiben.
+%
+Von zentraler Bedeutung ist ein Token in der Mitte des Schaltkreises, das über 
+seine Position den derzeitigen Zustand des Speichers angibt.
+%
+Der Speicher soll mit einer 0 initialisiert sein.
+%
+Entsprechend ist auch das mittlere Token (umkreist) in Abbildung 7 positioniert.
 
+
+\subsection{Schreibvorgang}
+Zunächst soll der Schreibvorgang erläutert werden.
+%
+Wobei eine 0 gespeichert ist und eine 1 geschrieben wird.
+%
+Der Schaltkreis durchläuft 6 verschieden Zustände, wobei einer 
+davon eine Sackgasse ist.
+%
+In Abbildung 8 sind die entsprechenden Übergänge gekennzeichnet 
+und jeweils das T-Element was als letztes Tokens bewegt hat grau markiert.
 
 \begin{figure}[h]
       \includegraphics[width=14cm]{bilder/write1Mem.png} 
@@ -438,6 +477,7 @@ seine Position den derzeitigen Zustand des Speichers angibt.
 \end{figure}
 
 \subsection{Lesevorgang}
+Jetzt wird das Auslesen der geschriebenen 1 erläutert.
 
 \begin{figure}[h]
       \includegraphics[width=14cm]{bilder/read1Mem.png} 
@@ -452,23 +492,29 @@ seine Position den derzeitigen Zustand des Speichers angibt.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=12cm]{bilder/UndGatter.png}
+    \includegraphics[width=12cm]{bilder/UndUnd.png}
     \caption{UND-Gatter aus 11 T-Elementen}
 \end{figure}    
 
 Als Teil meiner Eigenarbeit im Rahmen dieses Proseminars habe ich ein UND-Gatter
-mithilfe von nicht-polaren T-Elementen entworfen.
+mithilfe von nicht-polaren T-Elementen entworfen. \\
 %
-Es benutzt den Deadlock Backtracking Mechanismus und jede 
-mögliche Eingabe wird mit jeder möglichen Ausgabe und-verknüpft. 
+Es benutzt den Suchmechanismus der Tokens und Backtracking falls sie in eine 
+Sackgasse laufen. 
 %
-Dabei werden zunächst T-Element zum modellieren der möglichen Wege benutzt,
-die beiden Eingabe Token versuchen sich also zu entsprechend zu finden.
+Die Idee ist jede mögliche Eingabekombination jeweils mit einem 
+logischen UND zu verknüpfen. 
 %
-Haben sich beide Input Tokens gefunden wird ein Token weitergeleitet bei 
-den Eingaben A1 und B1 wird dieses Token direkt zu Ausgabe C1, bei allen 
-anderen Eingabemöglichkeiten werden die Token mithilfe von zwei weiteren 
-T-Elementen zusammengeführt für die Ausgabe C0.
+Das erste T-Element jeder Eingabe wird zum Modellieren
+der möglichen zwei Wege benutzt.
+%
+Die beiden Eingabe Token versuchen sich in dem der Eingabe entsprechenden
+T-Element, welches dem UND entspricht, zu finden.
+%
+Haben sich beide Input Tokens gefunden wird ein Token weitergeleitet.
+Bei der Eingabe $ (A_{1},\, B_{1}) $ wird dieses Token direkt zu Ausgabe
+$ C_{1} $, bei allen anderen Eingabemöglichkeiten werden die Token mithilfe
+von zwei weiteren T-Elementen zur Ausgabe $ C_{0} $ zusammengeführt. 
 
 %-----------------------------------------------------------------------------
 
@@ -493,15 +539,15 @@ können wir uns die Korrektheit schnell klar machen indem :
 %-----------------------------------------------------------------------------
 
 \section{Zusammenfassung und Ausblick}
-In dem Paper \cite{Peper_nonPolar_2018} wird eine neue Art
+In dem Aufsatz \cite{Peper_nonPolar_2018} wird eine neue Art
 von Schaltkreis vorgestellt der zukünfitig in der Nanoelektronik eingesetzt
 werden könnte.
 %
-Aufbauend auf den polaren Brown'schen token pass Schaltkreisen aus 
+Aufbauend auf den polaren brownschen token pass Schaltkreisen aus 
 \cite{Peper_Fundamentals_2013} werden nicht polare Kabel und T-Elemente 
 eingeführt deren Token keinen Bias in ein Richtung haben. 
 %
-Dabei ist das Konzept von Brown'scher Bewegung der Signale (Tokens) 
+Dabei ist das Konzept von brownscher Bewegung der Signale (Tokens) 
 der interessante und neue Aspekt der es ermöglicht neue Arten von Schaltkreisen 
 zu designen und auf ihre Eigenschaften zu untersuchen.
 %
@@ -522,7 +568,7 @@ Dies ist auf den Ausgabekabeln sinnvoll.
 %-----------------------------------------------------------------------------
 
 \subsection{Korrektheit}
-Zwar sind mit nicht polaren brown'schen Schaltkreisen Schaltkreiselemente mit
+Zwar sind mit nichtpolaren brownschen Schaltkreisen Schaltkreiselemente mit
 weniger Bauteilen möglichen.
 
 %
