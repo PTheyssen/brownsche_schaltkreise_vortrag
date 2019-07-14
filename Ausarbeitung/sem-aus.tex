@@ -154,43 +154,46 @@ Die in dem Aufsatz \cite{Peper_nonPolar_2018} präsentiereten brownschen
 Schaltkreise nutzen Tokens als Signale und setzen
 Fluktuation aktiv bei ihren Berechnungen ein.
 %
-Die Fluktuation orientiert sich dabei an der brownschen Molekularbewegung 
+Die Fluktuation ist angelehnt an die brownschen Molekularbewegung 
 in der Biologie. \\
 %
 In \cite{Peper_Fundamentals_2013} werden brownsche Schaltkreise 
 auf Basis von Petri-Netzen eingeführt und entsprechend formalisiert.
 %
 Die in \cite{Peper_Fundamentals_2013} vorgestellten Tokens der brownschen
-Schaltkreise haben implizit einen Bias in eine Richtung. \\ 
+Schaltkreise haben allerdings implizit einen Bias in eine Richtung. \\ 
 %
-Zentrales Motiv in \cite{Peper_nonPolar_2018} ist, dass durch mehr 
-Nichtdeterminismus weniger Funktionalität expilizit modelliert werden muss 
-und somit weniger Bauteile verwendet werden müssen.
+In \cite{Peper_nonPolar_2018} werden nichtpolare token-pass
+brownsche Schaltkreise vorgestellt, diese haben den Bias nicht.
+
+Die grundlegende Idee ist, dass durch den zusätzlichen Nichtdeterminismus 
+weniger Funktionalität expilizit modelliert werden muss 
+und somit weniger Bauteile verwendet werden können.
 
 
 %-----------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
 
 \section{Grundlagen}
-Zunächst werden die im Aufsatz  behandelten Schaltkreis Typen vorgestellt 
+Zunächst werden die im Aufsatz behandelten Schaltkreis Typen vorgestellt 
 um Unterschiede in Funktionalität und Aufbau hervorzuheben.  
 %
 Dann wird das T-Element betrachtet und wie sich damit die Universalität der
-brownschen token-pass Schaltkreise ergibt. \\
-%
-Tokens sind diskrete nicht teilbare Einheiten die Signale modellieren.
+brownschen token-pass Schaltkreise ergibt. 
+
+\smallskip Tokens sind diskrete nicht teilbare Einheiten die Signale modellieren.
 %
 Alle hier vorgestellten Schaltkreise sind asynchron, dies bedeutet sie haben
 keinen Zeitgeber und es kann nebenläufig zu Änderungen am Signal kommen.
 %
 Sie sind robust gegen Verzögerungen (delay-insentive),
 was heißt, dass Verzögerungen in der Signalweiterleitung 
-nicht zu unkorrekten Berechnungen führen.
+nicht zu inkorrekten Berechnungen führen.
 
 %-----------------------------------------------------------------------------
 
 \subsection{Token-based Schaltkreise}
-In token-basierte Schaltkreise werden Signale als einzelne diskrete
+In token-basierten Schaltkreise werden Signale als einzelne diskrete
 Token (Partikel) auf den Kabeln modelliert.
 %
 Es gibt keine weiteren Einschränkungen bezüglich Token und Tokenweiterleitung,
@@ -203,7 +206,8 @@ auf brownsche Schaltkreise übertragen. \\
 %
 Token basierte Schaltkreise die delay insentive sind können mit 
 einer Menge von Schaltkreisprimitiven konstruiert werden, genauso 
-wie synchrone Schaltkreise aus NOT-Gattern und UND-Gattern.
+wie synchrone Schaltkreise aus NOT-Gattern und UND-Gattern
+\cite{Peper_nonPolar_2018}.
 %
 Eine solche Menge nennt man dann universell und Abbildung \ref{fig:tokenBased}
 gibt dafür ein Beispiel.
@@ -226,7 +230,7 @@ Tria fügt zwei Tokens zusammen und je nach Eingabekabel kommt
 die Ausgabe auf ein bestimmtes Kabel.
 %
 Für jedes Input Token  $ I_{i} \, (i \in \{1, 2, 3\}) $ und $ I_{j} \, (j \in 
-\{1, 2, 3\}) $ erhalten wir das Ausgabe Token auf $O_{6-i-j}$.
+\{1, 2, 3\}) $ mit $ i \ne j $ erhalten wir das Ausgabe Token auf $O_{6-i-j}$.
 %
 Wobei das Zusammenführen beim Tria nur funktioniert wenn zwei Tokens da sind,
 ein einzelnes Token wartet solange bis ein zweites kommt.
@@ -358,10 +362,6 @@ Für einige Kabel in einem nichtpolaren Schaltkreis ist ein Bias sinnvoll.
 Ein Beispiel sind die Ausgabekabel da sich hier Tokens immer nur in eine 
 Richtung bewegen sollten und nicht nach erfolgreicher Berechnung diese 
 wieder rückwärtslaufen.
-%
-Die nicht-polaren Schaltkreise ermöglichen einfacheres Design und Verwendung
-von weniger T-Elementen, weil bestimmtes Verhalten zum Verhindern von
-Deadlocks, ausgelöst von Sackgassen, nicht expizit modelliert werden muss.
 
 \begin{figure}[h]
     \centering
@@ -369,6 +369,10 @@ Deadlocks, ausgelöst von Sackgassen, nicht expizit modelliert werden muss.
     \caption{nichtpolares T-Element und Terminator Kabel}
     \label{fig:T_Element}
 \end{figure}
+
+Die nicht-polaren Schaltkreise ermöglichen einfacheres Design und Verwendung
+von weniger T-Elementen, weil bestimmtes Verhalten zum Verhindern von
+Deadlocks, ausgelöst von Sackgassen, nicht expizit modelliert werden muss.
 
 
 %-----------------------------------------------------------------------------
@@ -391,9 +395,9 @@ Die Berechnungsuniversalität der token-basierten Schaltkreise wird in
 \cite{Lee_2005} gezeigt, dies geschieht allerdings durch Verweisen auf 
 noch ältere Aufsätze bis schließlich  auf \cite{Keller_1974} verwiesen wird.
 %
-Dadurch kann ich nicht nachvollziehen ob man wirklich von berechnungsuniversell
-sprechen kann bzw. die Universalität von einer Implentierung erreicht
-werden würde. 
+Dadurch kann ich nicht ganz nachvollziehen ob man wirklich von
+berechnungsuniversell sprechen kann bzw. die Universalität 
+von einer Implentierung erreicht werden würde. 
 
 \begin{figure}[h]
     \centering
@@ -452,7 +456,8 @@ nur 7  T-Elemente \cite{Peper_nonPolar_2018}.
 Grundlegend gibt es jeweils eine Menge an T-Elementen für das Lesen bzw. 
 Schreiben.
 %
-Von zentraler Bedeutung ist ein Token in der Mitte des Schaltkreises, das über seine Position den derzeitigen Zustand des Speichers angibt.
+Von zentraler Bedeutung ist ein Token in der Mitte des Schaltkreises,
+das über seine Position den derzeitigen Zustand des Speichers angibt.
 %
 Im folgenden wird dieses Token mit Zustandstoken bezeichnet. \\
 %
@@ -469,7 +474,7 @@ Es kann die folgende Zustände einnehmen:
 
 Der Speicher soll mit einer 0 initialisiert sein.
 %
-Entsprechend ist auch das mittlere Token (umkreist) in Abbildung 7 positioniert.
+Entsprechend ist auch das Zustandstoken (umkreist) in Abbildung 7 positioniert.
 
 
 \subsection{Schreibvorgang}
