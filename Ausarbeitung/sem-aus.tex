@@ -519,20 +519,16 @@ von zwei weiteren T-Elementen zur Ausgabe $ C_{0} $ zusammengeführt.
 %-----------------------------------------------------------------------------
 
 \subsection{Initialisierung}
-Es ist eine Initialisierung auf der Abbildung gegeben (die Position der Tokens), 
-außerdem sind die Kreise in den T-Elementen für eine korrekte Berechnung
-elementar.
+Es ist eine Initialisierung auf Abbildung 10 gegeben (die Position der Tokens), 
+solange mit dieser gestartet wird und nur gültige Eingaben (2 Tokens) 
+vorkommen, ist die Berechnung korrekt.
 %
 Diese Initialisierung ist nicht eindeutig und auch die Anordnung der
 Elemente ist veränderbar, was im Hinblick auf möglichst kurze Kabel 
-für eine schnellere Berechnung von Interesse ist.
-
-%-----------------------------------------------------------------------------
-
-\subsection{Korrektheit}
-Eine interessante Frage ist nun ob die Korrektheit dieses Schaltkreises
-beweisbar ist. Wenn wir die angegebene Initialisierung vorraussetzen können,
-können wir uns die Korrektheit schnell klar machen indem :
+für eine schnellere Berechnung von Interesse ist bzw. zu optimieren wäre.
+%
+Sobald jedoch die Initialisierung zu Beginn nicht gegeben ist kann es zu 
+falschen Ausgaben kommen wie: 0 und 1 gleichzeitig oder zweimal 0 bzw. 1. 
 
 
 %-----------------------------------------------------------------------------
@@ -540,19 +536,19 @@ können wir uns die Korrektheit schnell klar machen indem :
 
 \section{Zusammenfassung und Ausblick}
 In dem Aufsatz \cite{Peper_nonPolar_2018} wird eine neue Art
-von Schaltkreis vorgestellt der zukünfitig in der Nanoelektronik eingesetzt
+von Schaltkreis vorgestellt der zukünftig in der Nanoelektronik eingesetzt
 werden könnte.
 %
-Aufbauend auf den polaren brownschen token pass Schaltkreisen aus 
-\cite{Peper_Fundamentals_2013} werden nicht polare Kabel und T-Elemente 
-eingeführt deren Token keinen Bias in ein Richtung haben. 
+Aufbauend auf polaren brownschen token-pass Schaltkreisen aus 
+\cite{Peper_Fundamentals_2013} werden nichtpolare Kabel und T-Elemente 
+eingeführt, deren Token keinen Bias in eine Richtung haben. 
 %
-Dabei ist das Konzept von brownscher Bewegung der Signale (Tokens) 
-der interessante und neue Aspekt der es ermöglicht neue Arten von Schaltkreisen 
-zu designen und auf ihre Eigenschaften zu untersuchen.
+Dabei ist das Konzept von brownscher Bewegung der Tokens und der damit
+verbundene Nichtdeterminismus interessant und resultiert in einer neuen Art von
+Schaltkreisen, deren Design und Eigenschaften weiter zu untersuchen sind.
 %
-Jedoch sind Dinge wie Geschwindigkeit der Berechnung, Korrektheit beweisen und 
-welche arten von konkreten Implementierungen möglich sind noch zu klären.
+Jedoch sind Dinge wie die Geschwindigkeit der Berechnung, Korrektheit und 
+welche Arten von konkreten Implementierungen möglich sind noch weitgehend offen.
 
 %-----------------------------------------------------------------------------
 
