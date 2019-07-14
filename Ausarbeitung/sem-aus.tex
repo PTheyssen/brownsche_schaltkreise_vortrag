@@ -23,6 +23,7 @@
 \usepackage{fancyvrb}
 
 \usepackage{graphicx}
+\usepackage[export]{adjustbox}
 
 \usepackage{booktabs}
 \usepackage[shortlabels]{enumitem}
@@ -245,7 +246,7 @@ Token-pass Schaltkreisen lassen die Zahl der Tokens gleich.
 Tokens können nicht entstehen oder verschwinden und auch 
 nicht auf andere Kabel wechseln.
 %
-Äquivalenz von Token-pass und token-based zeigen (ein kabel wird zu zwei)
+Äquivalenz von token-pass und token-based zeigen (ein kabel wird zu zwei)
 die entsprechenden TP-Merge, TP-Fork, TP-Tria.
 %
 Token-pass Schaltkreise haben eine Menge an Eingabekablen die in
@@ -308,6 +309,14 @@ Deadlocks nicht expizit modelliert werden muss.
 %-----------------------------------------------------------------------------
 
 \section{T-Element}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=7cm]{bilder/T_Element.png}
+    \caption{T-Element}
+    \label{fig:T_Element}
+\end{figure}
+
 Grundlegende Funktion des T-Elementes entspricht mit Abbildung 3.
 %
 Eingang c ist der Basis Eingang des T-Elmentes hier muss immer ein Token
@@ -320,13 +329,7 @@ Kabel überführt.
 %
 Wenn bei a und b ein Token anliegt wird zufällig 
 eines der beiden ausgewählt und mit c überführt.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=7cm]{bilder/T_Element.png}
-    \caption{T-Element}
-    \label{fig:T_Element}
-\end{figure}    
+    
 
 In Abbildung 4 ist zu erkennen wie die token basierten Schaltkreispirmitive 
 (Merge, Fork und Tria) mit mithilfe des T-Elementes nachgebaut werden.
@@ -374,20 +377,36 @@ token pass Schaltkreise beim Design richtig ausnutzt.
 %-----------------------------------------------------------------------------
 
 \section{1-Bit Speicher}
-Nun soll anhand eines 1-Bit Speichers die Funktionsweise von brown'schen 
+Nun soll anhand eines 1-Bit Speichers die Funktionsweise von brownschen 
 token-pass Schaltkreisen erläutert werden.
 %
 Mithilfe von polaren T-Elementen ist es möglich einen 1-Bit Speicher mit 8
 T-Elementen zu bauen \cite{Peper_Fundamentals_2013}. 
 %
-Bei nicht-polaren brown'schen T-Elementen sind es sogar
+Bei nicht-polaren brownschen T-Elementen sind es sogar
 nur 7 \cite{Peper_nonPolar_2018}.
 %
+Grundlegend gibt es jeweils eine Menge an T-Elementen für das Lesen bzw. 
+Schreiben.
+%
+Von zentraler Bedeutung ist ein Token in der Mitte des Schaltkreises, das über 
+seine Position den derzeitigen Zustand des Speichers angibt.
 
 \begin{figure}[h]
       \centering
       \includegraphics[width=9cm]{bilder/NonPolarMemory.png} 
       \caption{1-Bit Speicher nicht polar token pass}
+\end{figure}
+
+\begin{figure}[h]
+      \includegraphics[width=14cm]{bilder/write1Mem.png} 
+      \caption{Schreiben einer 1}
+\end{figure}
+
+
+\begin{figure}[h]
+      \includegraphics[width=14cm]{bilder/read1Mem.png} 
+      \caption{Lesen einer 1}
 \end{figure}
 
 %-----------------------------------------------------------------------------
